@@ -1,0 +1,11 @@
+# Signing configuration for ImageType release builds
+#
+# To use: copy this file to signing.properties and fill in your keystore details.
+# signing.properties is gitignored and will NOT be committed.
+#
+# release.store.file points to the keystore relative to project root
+# If using a different keystore, update all values below
+release.store.file=app/imagetype.jks
+release.store.password=your-store-password
+release.key.alias=your-key-alias
+release.key.password=your-key-password

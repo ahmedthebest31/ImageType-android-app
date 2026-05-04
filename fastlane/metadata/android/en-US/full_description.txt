@@ -1,0 +1,41 @@
+Looking for a fast, easy, and fully accessible way to add text to your images? ImageType is your ultimate solution, built on a groundbreaking "Blind-First" philosophy. The interface is clean, simple, and intuitive — equally suitable for blind users relying on TalkBack and sighted users who prefer a straightforward, distraction-free experience. ImageType is fully offline, requires zero permissions, collects no data, and uses zero AI — every operation relies on deterministic computational algorithms, from binary search font sizing to precise coordinate-based rendering.
+
+🌟 PERFECT FOR EVERY USE CASE
+
+* Design elegant greeting cards for holidays and occasions.
+* Craft engaging social media posts, promotional ads, and quotes.
+* Create beautiful WhatsApp, Facebook, or Instagram stories and statuses.
+* Add Quranic verses, poetry, or daily typography to custom backgrounds.
+
+🌟 KEY FEATURES
+
+* Blind-First & Fully Screen-Reader Accessible: Every button, menu, and setting is carefully labeled and logically grouped for a seamless TalkBack experience. No visual clutter, just pure productivity.
+* Multilingual Interface: Navigate comfortably in Arabic, English, French, Italian, Spanish, German, and Turkish.
+* Complex Multilingual Text & Emojis: Type in any global language! Flawlessly mix Right-to-Left (RTL) Arabic with English on the same image, plus full Emoji support.
+* Smart Font Fallback: If you select an English font but type in Arabic, the app automatically falls back to embedded high-quality fonts like Amiri and Cairo.
+* Auto Fit Text (Binary Search Sizing): Check the "Fit Text" box, and our algorithm instantly calculates the maximum font size to fit your text perfectly within the image boundaries.
+* Limitless Customization: Control text position (9 anchors), size, font styles (Bold, Italic), and choose from a massive palette of text and background colors.
+* Adaptive Text Shadow: The app automatically applies the perfect shadow contrast based on your selected text color for optimal readability.
+* Multiple Canvas Sizes: Standard HD, Square (1:1), Portrait/Reels (9:16), or load a custom background via the secure Android Photo Picker.
+* Save & Load Templates: Save your favorite typography setups and load them instantly for your next design.
+* Quick Share Integration: Receive text from other apps (like WhatsApp) via the Share menu, and share the final image without cluttering your gallery.
+
+🔒 PRIVACY & PERMISSIONS
+
+* Zero Permissions Required: ImageType does NOT request access to your storage, camera, contacts, or location. The only time the app interacts with your files is when you explicitly tap "Load Image" — this opens Android's built-in system Photo Picker, which lets you choose an image without granting blanket storage access to the app. Your files stay yours.
+* No Data Collection: ImageType collects nothing. No telemetry, no analytics, no crash reports, no personal information — zero.
+* No Internet Required: The app works completely offline. No tracking, no ads, no remote servers. Your images and text never leave your device.
+* Zero AI: ImageType relies entirely on deterministic computational algorithms — binary search for font sizing, coordinate math for positioning, and direct pixel manipulation for rendering. No neural networks, no cloud processing, no machine learning. Every operation is predictable, transparent, and instant.
+
+🔓 100% FREE & OPEN SOURCE
+
+ImageType is completely free, ad-free, and open-source. We believe in building transparent tools that empower the community.
+
+Contribute or view the source code on GitHub:
+https://github.com/ahmedthebest31/ImageType-android-app
+
+💻 ALSO AVAILABLE ON DESKTOP
+
+ImageType is also available as a powerful, standalone desktop application for Windows, macOS, and Linux!
+Download the Desktop versions and view its source code:
+https://ahmedthebest31.github.io/ImageType/

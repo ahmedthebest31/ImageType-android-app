@@ -1,0 +1,1 @@
+Added tab transition animations, scroll-to-top on tab switch. Fixed onCheckedChange deprecation, removed double-tap zoom. Full Compose migration: keyboard, text input, color picker. Accessibility overhaul with proper TalkBack semantics across all interactive elements. Privacy: removed INTERNET permission, stripped dependency metadata, zero permissions required.

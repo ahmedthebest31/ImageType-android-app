@@ -1,0 +1,61 @@
+<resources>
+    <string name="app_name">ImageType</string>
+
+    <!-- Colors -->
+    <string name="color_white">Beyaz</string>
+    <string name="color_black">Siyah</string>
+    <string name="color_red">Kırmızı</string>
+    <string name="color_blue">Mavi</string>
+    <string name="color_green">Yeşil</string>
+    <string name="color_yellow">Sarı</string>
+    <string name="color_orange">Turuncu</string>
+    <string name="color_pink">Pembe</string>
+    <string name="color_purple">Mor</string>
+    <string name="color_gray">Gri</string>
+    <string name="color_cyan">Camgöbeği</string>
+    <string name="color_magenta">Galibarda</string>
+    <string name="color_light_blue">Açık Mavi</string>
+    <string name="color_light_green">Açık Yeşil</string>
+
+    <!-- Text Positions -->
+    <string name="pos_top_left">Sol Üst</string>
+    <string name="pos_top_center">Üst Orta</string>
+    <string name="pos_top_right">Sağ Üst</string>
+    <string name="pos_middle_left">Sol Orta</string>
+    <string name="pos_center">Orta</string>
+    <string name="pos_middle_right">Sağ Orta</string>
+    <string name="pos_bottom_left">Sol Alt</string>
+    <string name="pos_bottom_center">Alt Orta</string>
+    <string name="pos_bottom_right">Sağ Alt</string>
+
+    <!-- Background Types -->
+    <string name="bg_solid">Düz Renk</string>
+    <string name="bg_transparent">Şeffaf</string>
+    <string name="bg_existing">Mevcut Resim</string>
+
+    <!-- Dimensions -->
+    <string name="dim_standard">Standart (1920x1080)</string>
+    <string name="dim_hd">Standart HD (1280x720)</string>
+    <string name="dim_square">Kare (1080x1080)</string>
+    <string name="dim_portrait">Dikey/Reels (1080x1920)</string>
+    <string name="dim_4_3">4:3 (1024x768)</string>
+    <string name="dim_3_4">3:4 (768x1024)</string>
+    <string name="dim_ultrawide">Ultra Geniş (2560x1080)</string>
+    <string name="dim_twitter">Twitter Başlığı (1500x500)</string>
+
+    <!-- Qualities -->
+    <string name="qual_high">%100 (Yüksek)</string>
+    <string name="qual_medium">%80 (Orta)</string>
+    <string name="qual_low">%60 (Düşük)</string>
+
+    <!-- Font Styles -->
+    <string name="style_regular">Düzenli</string>
+    <string name="style_bold">Kalın</string>
+    <string name="style_italic">İtalik</string>
+    <string name="style_bold_italic">Kalın-İtalik</string>
+
+    <!-- App Theme -->
+    <string name="theme_dark">Karanlık Mod</string>
+    <string name="theme_light">Aydınlık Mod</string>
+    <string name="theme_system">Sistem Varsayılanı</string>
+</resources>

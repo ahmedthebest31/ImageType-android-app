@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    
+    <!-- White Polaroid Frame -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M28,26h52v52h-52z" />
+        
+    <!-- Polaroid Frame inner cutout (Dark Navy) -->
+    <path
+        android:fillColor="#0B131E"
+        android:pathData="M33,31h42v37h-42z" />
+        
+    <!-- 'T' Top Bar (White) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M39,40h20v5h-20z" />
+        
+    <!-- 'T' Stem (White) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M46.5,45h5v17h-5z" />
+        
+    <!-- Cursor line '|' (White) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M63,40h2.5v22h-2.5z" />
+        
+</vector>

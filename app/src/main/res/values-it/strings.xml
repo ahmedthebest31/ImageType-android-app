@@ -1,0 +1,61 @@
+<resources>
+    <string name="app_name">ImageType</string>
+
+    <!-- Colors -->
+    <string name="color_white">Bianco</string>
+    <string name="color_black">Nero</string>
+    <string name="color_red">Rosso</string>
+    <string name="color_blue">Blu</string>
+    <string name="color_green">Verde</string>
+    <string name="color_yellow">Giallo</string>
+    <string name="color_orange">Arancione</string>
+    <string name="color_pink">Rosa</string>
+    <string name="color_purple">Viola</string>
+    <string name="color_gray">Grigio</string>
+    <string name="color_cyan">Ciano</string>
+    <string name="color_magenta">Magenta</string>
+    <string name="color_light_blue">Azzurro</string>
+    <string name="color_light_green">Verde chiaro</string>
+
+    <!-- Text Positions -->
+    <string name="pos_top_left">Alto a sinistra</string>
+    <string name="pos_top_center">Alto al centro</string>
+    <string name="pos_top_right">Alto a destra</string>
+    <string name="pos_middle_left">Centro a sinistra</string>
+    <string name="pos_center">Centro</string>
+    <string name="pos_middle_right">Centro a destra</string>
+    <string name="pos_bottom_left">Basso a sinistra</string>
+    <string name="pos_bottom_center">Basso al centro</string>
+    <string name="pos_bottom_right">Basso a destra</string>
+
+    <!-- Background Types -->
+    <string name="bg_solid">Colore a tinta unita</string>
+    <string name="bg_transparent">Trasparente</string>
+    <string name="bg_existing">Immagine esistente</string>
+
+    <!-- Dimensions -->
+    <string name="dim_standard">Standard (1920x1080)</string>
+    <string name="dim_hd">Standard HD (1280x720)</string>
+    <string name="dim_square">Quadrato (1080x1080)</string>
+    <string name="dim_portrait">Verticale/Reels (1080x1920)</string>
+    <string name="dim_4_3">4:3 (1024x768)</string>
+    <string name="dim_3_4">3:4 (768x1024)</string>
+    <string name="dim_ultrawide">Oltre la larghezza (2560x1080)</string>
+    <string name="dim_twitter">Intestazione Twitter (1500x500)</string>
+
+    <!-- Qualities -->
+    <string name="qual_high">100% (Alta)</string>
+    <string name="qual_medium">80% (Media)</string>
+    <string name="qual_low">60% (Bassa)</string>
+
+    <!-- Font Styles -->
+    <string name="style_regular">Regolare</string>
+    <string name="style_bold">Grassetto</string>
+    <string name="style_italic">Corsivo</string>
+    <string name="style_bold_italic">Grassetto-Corsivo</string>
+
+    <!-- App Theme -->
+    <string name="theme_dark">Modalità scura</string>
+    <string name="theme_light">Modalità chiara</string>
+    <string name="theme_system">Predefinito di sistema</string>
+</resources>
