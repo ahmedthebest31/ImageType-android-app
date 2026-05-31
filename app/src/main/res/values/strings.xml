@@ -1,3 +1,61 @@
 <resources>
     <string name="app_name">ImageType</string>
+
+    <!-- Colors -->
+    <string name="color_white">White</string>
+    <string name="color_black">Black</string>
+    <string name="color_red">Red</string>
+    <string name="color_blue">Blue</string>
+    <string name="color_green">Green</string>
+    <string name="color_yellow">Yellow</string>
+    <string name="color_orange">Orange</string>
+    <string name="color_pink">Pink</string>
+    <string name="color_purple">Purple</string>
+    <string name="color_gray">Gray</string>
+    <string name="color_cyan">Cyan</string>
+    <string name="color_magenta">Magenta</string>
+    <string name="color_light_blue">Light Blue</string>
+    <string name="color_light_green">Light Green</string>
+
+    <!-- Text Positions -->
+    <string name="pos_top_left">Top Left</string>
+    <string name="pos_top_center">Top Center</string>
+    <string name="pos_top_right">Top Right</string>
+    <string name="pos_middle_left">Middle Left</string>
+    <string name="pos_center">Center</string>
+    <string name="pos_middle_right">Middle Right</string>
+    <string name="pos_bottom_left">Bottom Left</string>
+    <string name="pos_bottom_center">Bottom Center</string>
+    <string name="pos_bottom_right">Bottom Right</string>
+
+    <!-- Background Types -->
+    <string name="bg_solid">Solid Color</string>
+    <string name="bg_transparent">Transparent</string>
+    <string name="bg_existing">Existing Image</string>
+
+    <!-- Dimensions -->
+    <string name="dim_standard">Standard (1920x1080)</string>
+    <string name="dim_hd">Standard HD (1280x720)</string>
+    <string name="dim_square">Square (1080x1080)</string>
+    <string name="dim_portrait">Portrait/Reels (1080x1920)</string>
+    <string name="dim_4_3">4:3 (1024x768)</string>
+    <string name="dim_3_4">3:4 (768x1024)</string>
+    <string name="dim_ultrawide">Ultrawide (2560x1080)</string>
+    <string name="dim_twitter">Twitter Header (1500x500)</string>
+
+    <!-- Qualities -->
+    <string name="qual_high">100% (High)</string>
+    <string name="qual_medium">80% (Medium)</string>
+    <string name="qual_low">60% (Low)</string>
+
+    <!-- Font Styles -->
+    <string name="style_regular">Regular</string>
+    <string name="style_bold">Bold</string>
+    <string name="style_italic">Italic</string>
+    <string name="style_bold_italic">Bold-Italic</string>
+
+    <!-- App Theme -->
+    <string name="theme_dark">Dark Mode</string>
+    <string name="theme_light">Light Mode</string>
+    <string name="theme_system">System Default</string>
 </resources>

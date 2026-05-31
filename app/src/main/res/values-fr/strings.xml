@@ -1,0 +1,61 @@
+<resources>
+    <string name="app_name">ImageType</string>
+
+    <!-- Colors -->
+    <string name="color_white">Blanc</string>
+    <string name="color_black">Noir</string>
+    <string name="color_red">Rouge</string>
+    <string name="color_blue">Bleu</string>
+    <string name="color_green">Vert</string>
+    <string name="color_yellow">Jaune</string>
+    <string name="color_orange">Orange</string>
+    <string name="color_pink">Rose</string>
+    <string name="color_purple">Violet</string>
+    <string name="color_gray">Gris</string>
+    <string name="color_cyan">Cyan</string>
+    <string name="color_magenta">Magenta</string>
+    <string name="color_light_blue">Bleu clair</string>
+    <string name="color_light_green">Vert clair</string>
+
+    <!-- Text Positions -->
+    <string name="pos_top_left">Haut Gauche</string>
+    <string name="pos_top_center">Haut Centre</string>
+    <string name="pos_top_right">Haut Droite</string>
+    <string name="pos_middle_left">Milieu Gauche</string>
+    <string name="pos_center">Centre</string>
+    <string name="pos_middle_right">Milieu Droite</string>
+    <string name="pos_bottom_left">Bas Gauche</string>
+    <string name="pos_bottom_center">Bas Centre</string>
+    <string name="pos_bottom_right">Bas Droite</string>
+
+    <!-- Background Types -->
+    <string name="bg_solid">Couleur solide</string>
+    <string name="bg_transparent">Transparent</string>
+    <string name="bg_existing">Image existante</string>
+
+    <!-- Dimensions -->
+    <string name="dim_standard">Standard (1920x1080)</string>
+    <string name="dim_hd">Standard HD (1280x720)</string>
+    <string name="dim_square">Carré (1080x1080)</string>
+    <string name="dim_portrait">Portrait/Reels (1080x1920)</string>
+    <string name="dim_4_3">4:3 (1024x768)</string>
+    <string name="dim_3_4">3:4 (768x1024)</string>
+    <string name="dim_ultrawide">Ultra-large (2560x1080)</string>
+    <string name="dim_twitter">En-tête Twitter (1500x500)</string>
+
+    <!-- Qualities -->
+    <string name="qual_high">100% (Haute)</string>
+    <string name="qual_medium">80% (Moyenne)</string>
+    <string name="qual_low">60% (Basse)</string>
+
+    <!-- Font Styles -->
+    <string name="style_regular">Normal</string>
+    <string name="style_bold">Gras</string>
+    <string name="style_italic">Italique</string>
+    <string name="style_bold_italic">Gras-Italique</string>
+
+    <!-- App Theme -->
+    <string name="theme_dark">Mode sombre</string>
+    <string name="theme_light">Mode clair</string>
+    <string name="theme_system">Système par défaut</string>
+</resources>

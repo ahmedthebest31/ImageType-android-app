@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-  namespace = "com.example"
+  namespace = "com.ahmedsamy.imagetype"
   compileSdk { version = release(36) { minorApiLevel = 1 } }
 
   defaultConfig {
-    applicationId = "com.aistudio.imagetype.fnywqv"
+    applicationId = "com.ahmedsamy.imagetype"
     minSdk = 24
     targetSdk = 36
     versionCode = 1
