@@ -63,6 +63,8 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import java.util.Locale
 
+val LocalAppLanguage = staticCompositionLocalOf { "en" }
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,22 +91,9 @@ class MainActivity : ComponentActivity() {
             }
 
             val appLanguage by viewModel.appLanguage.collectAsState()
-            
-            val locale = remember(appLanguage) { Locale(appLanguage) }
-            val baseConfig = LocalConfiguration.current
-            val configuration = remember(appLanguage) {
-                Configuration(baseConfig).apply {
-                    setLocale(locale)
-                }
-            }
-            val baseContext = LocalContext.current
-            val context = remember(appLanguage) {
-                baseContext.createConfigurationContext(configuration)
-            }
 
             CompositionLocalProvider(
-                LocalConfiguration provides configuration,
-                LocalContext provides context
+                LocalAppLanguage provides appLanguage
             ) {
                 MyApplicationTheme(darkTheme = forceDark) {
                     Surface(
@@ -1287,12 +1276,21 @@ fun <T> ImageTypeDropdown(
 ) {
     var expanded by remember { mutableStateOf(false) }
     val context = LocalContext.current
+    val currentLang = LocalAppLanguage.current
+
+    val localizedContext = remember(context, currentLang) {
+        val locale = Locale(currentLang)
+        val config = Configuration(context.resources.configuration).apply {
+            setLocale(locale)
+        }
+        context.createConfigurationContext(config)
+    }
 
     val localizedGetLabel: (T) -> String = { item ->
         val stringRepresentation = getLabel(item)
         val resId = getDropdownItemStringResId(stringRepresentation)
         if (resId != 0) {
-            context.getString(resId)
+            localizedContext.getString(resId)
         } else {
             stringRepresentation
         }
