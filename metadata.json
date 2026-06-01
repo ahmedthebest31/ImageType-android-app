@@ -1,6 +1,0 @@
-{
-  "name": "ImageType",
-  "description": "An advanced text-to-image styling and generator suite designed for outstanding presentation and accessibility.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}
