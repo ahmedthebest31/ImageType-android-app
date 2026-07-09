@@ -136,9 +136,6 @@ class EditorViewModel(application: Application) : AndroidViewModel(application) 
             }
         }
 
-        // Trigger dynamic pre-download for standard fonts
-        triggerFontDownloads()
-
         // Combine inputs to generate the preview dynamically and instantly
         viewModelScope.launch {
             combine(
@@ -153,17 +150,6 @@ class EditorViewModel(application: Application) : AndroidViewModel(application) 
         }
     }
 
-    private fun triggerFontDownloads() {
-        viewModelScope.launch {
-            for (family in FontManager.fontFamilies) {
-                FontManager.downloadFontIfMissing(context, family) {
-                    // Refresh rendering when font loaded
-                    generateImage()
-                }
-            }
-        }
-    }
-
     // --- Change Functions representing State mutation ---
     fun setInputText(text: String) { _inputText.value = text }
     fun setFitText(fit: Boolean) { _fitText.value = fit }
@@ -171,11 +157,7 @@ class EditorViewModel(application: Application) : AndroidViewModel(application) 
     fun setTextPosition(position: String) { _textPosition.value = position }
     fun setFontFamily(family: String) {
         _fontFamily.value = family
-        viewModelScope.launch {
-            FontManager.downloadFontIfMissing(context, family) {
-                generateImage()
-            }
-        }
+        generateImage()
     }
     fun setFontStyle(style: String) { _fontStyle.value = style }
     fun setTextColor(color: String) { _textColor.value = color }

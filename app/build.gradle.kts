@@ -65,11 +65,6 @@ android {
             } else {
                 signingConfig = null
             }
-
-            dependenciesInfo {
-                includeInApk = false
-                includeInBundle = false
-            }
         }
     }
 
@@ -80,6 +75,11 @@ android {
 
     kotlin { jvmToolchain(21) }
     buildFeatures { compose = true }
+
+    dependenciesInfo {
+        includeInApk = false
+        includeInBundle = false
+    }
 }
 
 dependencies {
