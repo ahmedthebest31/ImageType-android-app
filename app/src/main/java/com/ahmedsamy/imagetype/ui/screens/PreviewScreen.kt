@@ -38,7 +38,7 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.stringResource
+import com.ahmedsamy.imagetype.util.stringRes
 import androidx.compose.ui.semantics.*
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -53,9 +53,9 @@ fun TabLivePreviewWorkspace(viewModel: EditorViewModel) {
     val isRendering by viewModel.isRendering.collectAsState()
     val bgType by viewModel.bgType.collectAsState()
 
-    val renderingLabelSem = stringResource(R.string.rendering_label)
-    val zoomOutSem = stringResource(R.string.zoom_out)
-    val zoomInSem = stringResource(R.string.zoom_in)
+    val renderingLabelSem = stringRes(R.string.rendering_label)
+    val zoomOutSem = stringRes(R.string.zoom_out)
+    val zoomInSem = stringRes(R.string.zoom_in)
 
     Box(
         modifier = Modifier
@@ -68,7 +68,7 @@ fun TabLivePreviewWorkspace(viewModel: EditorViewModel) {
         if (bitmap != null) {
             var scale by remember { mutableStateOf(1f) }
             var offset by remember { mutableStateOf(Offset.Zero) }
-            val zoomLevelSem = stringResource(R.string.zoom_level, (scale * 100).toInt())
+            val zoomLevelSem = stringRes(R.string.zoom_level, (scale * 100).toInt())
             val transformState = rememberTransformableState { zoomChange, offsetChange, _ ->
                 scale = (scale * zoomChange).coerceIn(1f, 6f)
                 offset += offsetChange
@@ -88,7 +88,7 @@ fun TabLivePreviewWorkspace(viewModel: EditorViewModel) {
             ) {
                 Image(
                     bitmap = bitmap.asImageBitmap(),
-                    contentDescription = stringResource(R.string.preview_description),
+                    contentDescription = stringRes(R.string.preview_description),
                     modifier = Modifier
                         .fillMaxSize()
                         .graphicsLayer(
@@ -116,7 +116,7 @@ fun TabLivePreviewWorkspace(viewModel: EditorViewModel) {
                     Text("-", style = MaterialTheme.typography.headlineMedium)
                 }
                 Text(
-                    text = stringResource(R.string.zoom_level, (scale * 100).toInt()),
+                    text = stringRes(R.string.zoom_level, (scale * 100).toInt()),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier.semantics { contentDescription = zoomLevelSem }
@@ -142,7 +142,7 @@ fun TabLivePreviewWorkspace(viewModel: EditorViewModel) {
                 )
                 Spacer(Modifier.height(16.dp))
                 Text(
-                    text = stringResource(R.string.no_preview_available),
+                    text = stringRes(R.string.no_preview_available),
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
                     textAlign = TextAlign.Center
@@ -170,7 +170,7 @@ fun TabLivePreviewWorkspace(viewModel: EditorViewModel) {
                             strokeWidth = 3.dp
                         )
                         Text(
-                            text = stringResource(R.string.rendering_label),
+                            text = stringRes(R.string.rendering_label),
                             style = MaterialTheme.typography.bodyLarge,
                             fontWeight = FontWeight.Bold
                         )

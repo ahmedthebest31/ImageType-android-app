@@ -7,6 +7,7 @@
     <string name="color_red">أحمر</string>
     <string name="color_blue">أزرق</string>
     <string name="color_green">أخضر</string>
+    <string name="color_islamic_green">أخضر إسلامي</string>
     <string name="color_yellow">أصفر</string>
     <string name="color_orange">برتقالي</string>
     <string name="color_pink">وردي</string>
@@ -58,4 +59,54 @@
     <string name="theme_dark">الوضع الداكن</string>
     <string name="theme_light">الوضع الفاتح</string>
     <string name="theme_system">افتراضي النظام</string>
+
+    <!-- Navigation Tabs -->
+    <string name="tab_editor">المحرر</string>
+    <string name="tab_preview">المعاينة</string>
+    <string name="tab_settings">الإعدادات</string>
+
+    <!-- UI Labels -->
+    <string name="paste_success">تم لصق النص من الحافظة</string>
+    <string name="paste_error">تعذر القراءة من الحافظة</string>
+    <string name="save_error">فشل حفظ الصورة</string>
+    <string name="share_error">فشل مشاركة الصورة</string>
+    <string name="font_size_slider">حجم الخط</string>
+    <string name="font_size_label">الحجم: %1$d</string>
+    <string name="fit_text_checkbox">ملاءمة النص للصورة</string>
+    <string name="enable_shadow_label">ظل</string>
+    <string name="input_placeholder">اكتب نصك هنا…</string>
+    <string name="paste_button">لصق</string>
+    <string name="text_position_label">الموضع</string>
+    <string name="font_family_label">الخط</string>
+    <string name="font_style_label">النمط</string>
+    <string name="text_color_label">لون النص</string>
+    <string name="dimensions_label">الأبعاد</string>
+    <string name="bg_type_label">الخلفية</string>
+    <string name="bg_color_label">لون الخلفية</string>
+    <string name="existing_image_button">اختيار صورة</string>
+    <string name="bg_selected">تم اختيار صورة الخلفية</string>
+    <string name="image_quality_label">الجودة</string>
+    <string name="error_empty_text">الرجاء إدخال نص أولاً</string>
+    <string name="success_save">تم حفظ الصورة في المعرض</string>
+    <string name="save_gallery_button">حفظ</string>
+    <string name="share_image_button">مشاركة</string>
+    <string name="rendering_label">جارٍ إنشاء المعاينة…</string>
+    <string name="zoom_out">تصغير</string>
+    <string name="zoom_in">تكبير</string>
+    <string name="zoom_level">تكبير %1$d%%</string>
+    <string name="preview_description">معاينة حية للنص فوق الخلفية المختارة</string>
+    <string name="no_preview_available">لا توجد معاينة متاحة</string>
+    <string name="template_name_error">الرجاء إدخال اسم القالب</string>
+    <string name="share_app_title">مشاركة ImageType</string>
+    <string name="theme_label">الطابع</string>
+    <string name="language_label">اللغة</string>
+    <string name="haptic_toggle">الاهتزاز اللمسي</string>
+    <string name="template_name_placeholder">اسم القالب…</string>
+    <string name="success_template">تم حفظ القالب</string>
+    <string name="save_template_button">حفظ القالب</string>
+    <string name="load_template_label">تحميل قالب</string>
+    <string name="template_loaded">تم تحميل القالب "%1$s"</string>
+    <string name="about_downloads_button">عن التطبيق والتنزيلات</string>
+    <string name="share_app_button">مشاركة التطبيق</string>
+    <string name="rate_app_button">تقييم التطبيق</string>
 </resources>

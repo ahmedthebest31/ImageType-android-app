@@ -18,7 +18,7 @@ class PreferencesManager(private val context: Context) {
     }
 
     val themeFlow: Flow<String> = context.dataStore.data.map { preferences ->
-        preferences[KEY_THEME] ?: "Dark"
+        preferences[KEY_THEME] ?: "System Default"
     }
 
     val languageFlow: Flow<String> = context.dataStore.data.map { preferences ->

@@ -52,7 +52,7 @@ import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.res.stringResource
+import com.ahmedsamy.imagetype.util.stringRes
 import androidx.compose.ui.semantics.*
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -83,13 +83,13 @@ fun TabEditorWorkspace(viewModel: EditorViewModel) {
 
     val context = LocalContext.current
 
-    val pasteSuccessText = stringResource(R.string.paste_success)
-    val pasteErrorText = stringResource(R.string.paste_error)
-    val saveErrorText = stringResource(R.string.save_error)
-    val shareErrorText = stringResource(R.string.share_error)
-    val fontSizeSliderText = stringResource(R.string.font_size_slider)
-    val fitTextSemText = stringResource(R.string.fit_text_checkbox)
-    val shadowSemText = stringResource(R.string.enable_shadow_label)
+    val pasteSuccessText = stringRes(R.string.paste_success)
+    val pasteErrorText = stringRes(R.string.paste_error)
+    val saveErrorText = stringRes(R.string.save_error)
+    val shareErrorText = stringRes(R.string.share_error)
+    val fontSizeSliderText = stringRes(R.string.font_size_slider)
+    val fitTextSemText = stringRes(R.string.fit_text_checkbox)
+    val shadowSemText = stringRes(R.string.enable_shadow_label)
 
     val photoPickerLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.PickVisualMedia(),
@@ -125,8 +125,8 @@ fun TabEditorWorkspace(viewModel: EditorViewModel) {
                         .testTag("input_text_field"),
                     minLines = 3,
                     maxLines = 6,
-                    label = { Text(stringResource(R.string.input_placeholder)) },
-                    placeholder = { Text(stringResource(R.string.input_placeholder)) }
+                    label = { Text(stringRes(R.string.input_placeholder)) },
+                    placeholder = { Text(stringRes(R.string.input_placeholder)) }
                 )
 
                 Button(
@@ -158,7 +158,7 @@ fun TabEditorWorkspace(viewModel: EditorViewModel) {
                             modifier = Modifier.size(18.dp)
                         )
                         Spacer(Modifier.width(8.dp))
-                        Text(stringResource(R.string.paste_button))
+                        Text(stringRes(R.string.paste_button))
                     }
                 }
             }
@@ -176,25 +176,23 @@ fun TabEditorWorkspace(viewModel: EditorViewModel) {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(8.dp),
+                        .clip(RoundedCornerShape(8.dp))
+                        .clickable {
+                            viewModel.setFitText(!fitText)
+                            if (hapticsEnabled) hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)
+                        }
+                        .padding(8.dp)
+                        .semantics(mergeDescendants = true) {},
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Checkbox(
                         checked = fitText,
-                        onCheckedChange = { nextVal ->
-                            viewModel.setFitText(nextVal)
-                            if (hapticsEnabled) hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)
-                        },
-                        modifier = Modifier
-                            .testTag("checkbox_fit_text")
-                            .semantics {
-                                role = Role.Checkbox
-                                stateDescription = if (fitText) "On" else "Off"
-                            }
+                        onCheckedChange = null,
+                        modifier = Modifier.testTag("checkbox_fit_text")
                     )
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(
-                        text = stringResource(R.string.fit_text_checkbox),
+                        text = stringRes(R.string.fit_text_checkbox),
                         style = MaterialTheme.typography.bodyLarge
                     )
                 }
@@ -207,7 +205,7 @@ fun TabEditorWorkspace(viewModel: EditorViewModel) {
                     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                         Column {
                             Text(
-                                text = stringResource(R.string.font_size_label, fontSize.toInt()),
+                                text = stringRes(R.string.font_size_label, fontSize.toInt()),
                                 style = MaterialTheme.typography.bodyLarge
                             )
                             Slider(
@@ -227,7 +225,7 @@ fun TabEditorWorkspace(viewModel: EditorViewModel) {
                             "Bottom Left", "Bottom Center", "Bottom Right"
                         )
                         ImageTypeDropdown(
-                            label = stringResource(R.string.text_position_label),
+                            label = stringRes(R.string.text_position_label),
                             options = positionOptions,
                             selectedOption = textPosition,
                             onOptionSelected = { viewModel.setTextPosition(it) },
@@ -239,7 +237,7 @@ fun TabEditorWorkspace(viewModel: EditorViewModel) {
 
                 val fontOptionLabels = FontManager.fontFamilies
                 ImageTypeDropdown(
-                    label = stringResource(R.string.font_family_label),
+                    label = stringRes(R.string.font_family_label),
                     options = fontOptionLabels,
                     selectedOption = fontFamily,
                     onOptionSelected = { viewModel.setFontFamily(it) },
@@ -249,7 +247,7 @@ fun TabEditorWorkspace(viewModel: EditorViewModel) {
 
                 val fontStyles = listOf("Regular", "Bold", "Italic", "Bold-Italic")
                 ImageTypeDropdown(
-                    label = stringResource(R.string.font_style_label),
+                    label = stringRes(R.string.font_style_label),
                     options = fontStyles,
                     selectedOption = fontStyle,
                     onOptionSelected = { viewModel.setFontStyle(it) },
@@ -263,7 +261,7 @@ fun TabEditorWorkspace(viewModel: EditorViewModel) {
                     "Light Blue", "Light Green"
                 )
                 ImageTypeDropdown(
-                    label = stringResource(R.string.text_color_label),
+                    label = stringRes(R.string.text_color_label),
                     options = colorsList,
                     selectedOption = textColor,
                     onOptionSelected = { viewModel.setTextColor(it) },
@@ -274,25 +272,23 @@ fun TabEditorWorkspace(viewModel: EditorViewModel) {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(8.dp),
+                        .clip(RoundedCornerShape(8.dp))
+                        .clickable {
+                            viewModel.setTextShadow(!textShadow)
+                            if (hapticsEnabled) hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)
+                        }
+                        .padding(8.dp)
+                        .semantics(mergeDescendants = true) {},
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Checkbox(
                         checked = textShadow,
-                        onCheckedChange = { prev ->
-                            viewModel.setTextShadow(!prev)
-                            if (hapticsEnabled) hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)
-                        },
-                        modifier = Modifier
-                            .testTag("checkbox_text_shadow")
-                            .semantics {
-                                role = Role.Checkbox
-                                stateDescription = if (textShadow) "On" else "Off"
-                            }
+                        onCheckedChange = null,
+                        modifier = Modifier.testTag("checkbox_text_shadow")
                     )
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(
-                        text = stringResource(R.string.enable_shadow_label),
+                        text = stringRes(R.string.enable_shadow_label),
                         style = MaterialTheme.typography.bodyLarge
                     )
                 }
@@ -314,7 +310,7 @@ fun TabEditorWorkspace(viewModel: EditorViewModel) {
                     "Ultrawide (2560x1080)", "Twitter Header (1500x500)"
                 )
                 ImageTypeDropdown(
-                    label = stringResource(R.string.dimensions_label),
+                    label = stringRes(R.string.dimensions_label),
                     options = dimensionsList,
                     selectedOption = dimensions,
                     onOptionSelected = { viewModel.setDimensions(it) },
@@ -324,7 +320,7 @@ fun TabEditorWorkspace(viewModel: EditorViewModel) {
 
                 val bgTypes = listOf("Solid Color", "Transparent", "Existing Image")
                 ImageTypeDropdown(
-                    label = stringResource(R.string.bg_type_label),
+                    label = stringRes(R.string.bg_type_label),
                     options = bgTypes,
                     selectedOption = bgType,
                     onOptionSelected = { viewModel.setBgType(it) },
@@ -343,7 +339,7 @@ fun TabEditorWorkspace(viewModel: EditorViewModel) {
                         "Magenta", "Light Blue", "Light Green"
                     )
                     ImageTypeDropdown(
-                        label = stringResource(R.string.bg_color_label),
+                        label = stringRes(R.string.bg_color_label),
                         options = bgColorsList,
                         selectedOption = bgColor,
                         onOptionSelected = { viewModel.setBgColor(it) },
@@ -371,12 +367,12 @@ fun TabEditorWorkspace(viewModel: EditorViewModel) {
                         ) {
                             Icon(Icons.Default.Image, contentDescription = null)
                             Spacer(Modifier.width(8.dp))
-                            Text(stringResource(R.string.existing_image_button))
+                            Text(stringRes(R.string.existing_image_button))
                         }
 
                         if (bgImageUri != null) {
                             Text(
-                                text = stringResource(R.string.bg_selected, bgImageUri?.lastPathSegment ?: ""),
+                                text = stringRes(R.string.bg_selected, bgImageUri?.lastPathSegment ?: ""),
                                 style = MaterialTheme.typography.bodySmall,
                                 maxLines = 1
                             )
@@ -386,7 +382,7 @@ fun TabEditorWorkspace(viewModel: EditorViewModel) {
 
                 val qualities = listOf("100% (High)", "80% (Medium)", "60% (Low)")
                 ImageTypeDropdown(
-                    label = stringResource(R.string.image_quality_label),
+                    label = stringRes(R.string.image_quality_label),
                     options = qualities,
                     selectedOption = imageQuality,
                     onOptionSelected = { viewModel.setImageQuality(it) },
@@ -396,8 +392,8 @@ fun TabEditorWorkspace(viewModel: EditorViewModel) {
             }
         }
 
-        val errorText = stringResource(R.string.error_empty_text)
-        val successSaveText = stringResource(R.string.success_save)
+        val errorText = stringRes(R.string.error_empty_text)
+        val successSaveText = stringRes(R.string.success_save)
 
         Row(
             modifier = Modifier
@@ -429,7 +425,7 @@ fun TabEditorWorkspace(viewModel: EditorViewModel) {
             ) {
                 Icon(Icons.Default.Save, contentDescription = null)
                 Spacer(modifier = Modifier.width(8.dp))
-                Text(stringResource(R.string.save_gallery_button), style = MaterialTheme.typography.titleMedium)
+                Text(stringRes(R.string.save_gallery_button), style = MaterialTheme.typography.titleMedium)
             }
 
             Button(
@@ -458,7 +454,7 @@ fun TabEditorWorkspace(viewModel: EditorViewModel) {
                 ) {
                     Icon(Icons.Default.Share, contentDescription = null)
                     Spacer(modifier = Modifier.width(8.dp))
-                    Text(stringResource(R.string.share_image_button), style = MaterialTheme.typography.titleMedium)
+                    Text(stringRes(R.string.share_image_button), style = MaterialTheme.typography.titleMedium)
                 }
             }
         }

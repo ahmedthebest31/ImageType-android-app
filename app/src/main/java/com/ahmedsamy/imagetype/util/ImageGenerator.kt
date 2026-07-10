@@ -19,8 +19,8 @@ import com.ahmedsamy.imagetype.FontManager
 
 class ImageGenerator(private val context: Context) {
     private val TAG = "ImageGenerator"
-    private var cachedBgUri: Uri? = null
-    private var cachedBgBitmap: Bitmap? = null
+    @Volatile private var cachedBgUri: Uri? = null
+    @Volatile private var cachedBgBitmap: Bitmap? = null
 
     fun generate(
         inputText: String,
@@ -232,10 +232,10 @@ class ImageGenerator(private val context: Context) {
         }
         return try {
             val contentResolver = context.contentResolver
-            val inputStream = contentResolver.openInputStream(uri) ?: return null
             val bounds = BitmapFactory.Options().apply { inJustDecodeBounds = true }
-            BitmapFactory.decodeStream(contentResolver.openInputStream(uri), null, bounds)
-            inputStream.close()
+            contentResolver.openInputStream(uri)?.use { stream ->
+                BitmapFactory.decodeStream(stream, null, bounds)
+            }
 
             val maxBound = 2048
             var sampleSize = 1
@@ -248,7 +248,9 @@ class ImageGenerator(private val context: Context) {
             }
 
             val options = BitmapFactory.Options().apply { inSampleSize = sampleSize }
-            val bitmap = BitmapFactory.decodeStream(contentResolver.openInputStream(uri), null, options)
+            val bitmap = contentResolver.openInputStream(uri)?.use { stream ->
+                BitmapFactory.decodeStream(stream, null, options)
+            }
             cachedBgUri = uri
             cachedBgBitmap = bitmap
             bitmap

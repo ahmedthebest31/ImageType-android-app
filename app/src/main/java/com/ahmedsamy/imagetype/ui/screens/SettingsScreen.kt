@@ -26,7 +26,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.Switch
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -43,7 +43,7 @@ import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.res.stringResource
+import com.ahmedsamy.imagetype.util.stringRes
 import androidx.compose.ui.semantics.*
 import androidx.compose.ui.unit.dp
 import com.ahmedsamy.imagetype.EditorViewModel
@@ -63,8 +63,9 @@ fun TabSettingsWorkspace(viewModel: EditorViewModel) {
 
     var templateInputName by remember { mutableStateOf("") }
 
-    val templateNameErrorText = stringResource(R.string.template_name_error)
-    val shareAppTitleText = stringResource(R.string.share_app_title)
+    val templateNameErrorText = stringRes(R.string.template_name_error)
+    val shareAppTitleText = stringRes(R.string.share_app_title)
+    val templateLoadedText = stringRes(R.string.template_loaded)
 
     Column(
         modifier = Modifier
@@ -84,7 +85,7 @@ fun TabSettingsWorkspace(viewModel: EditorViewModel) {
             ) {
                 val themes = listOf("Dark Mode", "Light Mode", "System Default")
                 ImageTypeDropdown(
-                    label = stringResource(R.string.theme_label),
+                    label = stringRes(R.string.theme_label),
                     options = themes,
                     selectedOption = appTheme,
                     onOptionSelected = { viewModel.updateTheme(it) },
@@ -101,7 +102,7 @@ fun TabSettingsWorkspace(viewModel: EditorViewModel) {
                 )
 
                 ImageTypeDropdown(
-                    label = stringResource(R.string.language_label),
+                    label = stringRes(R.string.language_label),
                     options = languages,
                     selectedOption = appLanguage,
                     getLabel = { languageDisplayNames[it] ?: "English" },
@@ -113,20 +114,23 @@ fun TabSettingsWorkspace(viewModel: EditorViewModel) {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(8.dp),
+                        .clip(RoundedCornerShape(8.dp))
+                        .clickable {
+                            viewModel.updateHaptics(!hapticsEnabled)
+                            if (!hapticsEnabled) hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)
+                        }
+                        .padding(8.dp)
+                        .semantics(mergeDescendants = true) {},
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Switch(
+                    Checkbox(
                         checked = hapticsEnabled,
-                        onCheckedChange = { prev ->
-                            viewModel.updateHaptics(!prev)
-                            if (!prev) hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)
-                        },
+                        onCheckedChange = null,
                         modifier = Modifier.testTag("switch_haptic_feedback")
                     )
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(
-                        text = stringResource(R.string.haptic_toggle),
+                        text = stringRes(R.string.haptic_toggle),
                         style = MaterialTheme.typography.bodyLarge
                     )
                 }
@@ -145,14 +149,14 @@ fun TabSettingsWorkspace(viewModel: EditorViewModel) {
                 OutlinedTextField(
                     value = templateInputName,
                     onValueChange = { templateInputName = it },
-                    label = { Text(stringResource(R.string.template_name_placeholder)) },
+                    label = { Text(stringRes(R.string.template_name_placeholder)) },
                     modifier = Modifier
                         .fillMaxWidth()
                         .testTag("template_name_input"),
                     singleLine = true
                 )
 
-                val successTemplateText = stringResource(R.string.success_template)
+                val successTemplateText = stringRes(R.string.success_template)
                 Button(
                     onClick = {
                         if (hapticsEnabled) hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)
@@ -170,18 +174,18 @@ fun TabSettingsWorkspace(viewModel: EditorViewModel) {
                 ) {
                     Icon(Icons.Default.Save, contentDescription = null)
                     Spacer(Modifier.width(8.dp))
-                    Text(stringResource(R.string.save_template_button))
+                    Text(stringRes(R.string.save_template_button))
                 }
 
                 if (savedTemplates.isNotEmpty()) {
                     ImageTypeDropdown(
-                        label = stringResource(R.string.load_template_label),
+                        label = stringRes(R.string.load_template_label),
                         options = savedTemplates,
                         selectedOption = savedTemplates.first(),
                         getLabel = { it.name },
                         onOptionSelected = {
                             viewModel.loadTemplate(it)
-                            Toast.makeText(context, context.getString(R.string.template_loaded, it.name), Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, String.format(templateLoadedText, it.name), Toast.LENGTH_SHORT).show()
                         },
                         hapticFeedback = hapticFeedback,
                         hapticsEnabled = hapticsEnabled
@@ -212,7 +216,7 @@ fun TabSettingsWorkspace(viewModel: EditorViewModel) {
                 ) {
                     Icon(Icons.Default.Language, contentDescription = null)
                     Spacer(Modifier.width(8.dp))
-                    Text(stringResource(R.string.about_downloads_button))
+                    Text(stringRes(R.string.about_downloads_button))
                 }
 
                 Button(
@@ -237,7 +241,7 @@ fun TabSettingsWorkspace(viewModel: EditorViewModel) {
                     ) {
                         Icon(Icons.Default.Share, contentDescription = null)
                         Spacer(Modifier.width(8.dp))
-                        Text(stringResource(R.string.share_app_button))
+                        Text(stringRes(R.string.share_app_button))
                     }
                 }
 
@@ -269,7 +273,7 @@ fun TabSettingsWorkspace(viewModel: EditorViewModel) {
                     ) {
                         Icon(Icons.Default.StarRate, contentDescription = null)
                         Spacer(Modifier.width(8.dp))
-                        Text(stringResource(R.string.rate_app_button))
+                        Text(stringRes(R.string.rate_app_button))
                     }
                 }
             }

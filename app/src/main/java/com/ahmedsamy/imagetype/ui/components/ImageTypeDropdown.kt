@@ -113,6 +113,7 @@ fun getDropdownItemStringResId(option: String): Int {
         "Red" -> R.string.color_red
         "Blue" -> R.string.color_blue
         "Green" -> R.string.color_green
+        "Islamic Green" -> R.string.color_islamic_green
         "Yellow" -> R.string.color_yellow
         "Orange" -> R.string.color_orange
         "Pink" -> R.string.color_pink

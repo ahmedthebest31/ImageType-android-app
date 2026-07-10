@@ -17,9 +17,8 @@ import android.widget.Toast
 import androidx.core.content.FileProvider
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.Types
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import com.ahmedsamy.imagetype.util.Template
+import com.ahmedsamy.imagetype.util.TemplateSerializer
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -28,35 +27,16 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStream
 
-data class Template(
-    val id: String,
-    val name: String,
-    val text: String,
-    val fitText: Boolean,
-    val fontSize: Float,
-    val textPosition: String,
-    val fontFamily: String,
-    val fontStyle: String,
-    val textColor: String,
-    val textShadow: Boolean,
-    val dimensions: String,
-    val bgType: String,
-    val bgColor: String,
-    val imageQuality: String
-)
-
 class EditorViewModel(application: Application) : AndroidViewModel(application) {
     private val TAG = "EditorViewModel"
     private val context = application.applicationContext
     private val preferencesManager = PreferencesManager(context)
 
-    // Moshi Setup
-    private val moshi = Moshi.Builder().addLast(KotlinJsonAdapterFactory()).build()
-    private val templateListType = Types.newParameterizedType(List::class.java, Template::class.java)
-    private val templatesAdapter = moshi.adapter<List<Template>>(templateListType)
+    // Template Serialization
+    private val templateSerializer = TemplateSerializer()
 
     // --- Tab 1 Editor & Actions UI States ---
-    private val _inputText = MutableStateFlow("ImageType")
+    private val _inputText = MutableStateFlow("")
     val inputText: StateFlow<String> = _inputText.asStateFlow()
 
     private val _fitText = MutableStateFlow(true)
@@ -103,7 +83,7 @@ class EditorViewModel(application: Application) : AndroidViewModel(application) 
     val isRendering: StateFlow<Boolean> = _isRendering.asStateFlow()
 
     // --- Tab 3 Settings & Metadata States ---
-    private val _appTheme = MutableStateFlow("Dark")
+    private val _appTheme = MutableStateFlow("System Default")
     val appTheme: StateFlow<String> = _appTheme.asStateFlow()
 
     private val _appLanguage = MutableStateFlow("en")
@@ -129,7 +109,7 @@ class EditorViewModel(application: Application) : AndroidViewModel(application) 
         viewModelScope.launch {
             preferencesManager.templatesFlow.collect { json ->
                 try {
-                    _savedTemplates.value = templatesAdapter.fromJson(json) ?: emptyList()
+                    _savedTemplates.value = templateSerializer.fromJson(json) ?: emptyList()
                 } catch (e: Exception) {
                     Log.e(TAG, "Failed loading templates JSON block", e)
                 }
@@ -155,10 +135,7 @@ class EditorViewModel(application: Application) : AndroidViewModel(application) 
     fun setFitText(fit: Boolean) { _fitText.value = fit }
     fun setFontSize(size: Float) { _fontSize.value = size }
     fun setTextPosition(position: String) { _textPosition.value = position }
-    fun setFontFamily(family: String) {
-        _fontFamily.value = family
-        generateImage()
-    }
+    fun setFontFamily(family: String) { _fontFamily.value = family }
     fun setFontStyle(style: String) { _fontStyle.value = style }
     fun setTextColor(color: String) { _textColor.value = color }
     fun setTextShadow(shadow: Boolean) { _textShadow.value = shadow }
@@ -208,7 +185,7 @@ class EditorViewModel(application: Application) : AndroidViewModel(application) 
         currentList.add(template)
         _savedTemplates.value = currentList
         viewModelScope.launch {
-            val json = templatesAdapter.toJson(currentList)
+            val json = templateSerializer.toJson(currentList)
             preferencesManager.saveTemplates(json)
         }
     }
@@ -484,10 +461,10 @@ class EditorViewModel(application: Application) : AndroidViewModel(application) 
     private fun loadUriBitmap(uri: Uri): Bitmap? {
         return try {
             val contentResolver = context.contentResolver
-            val inputStream = contentResolver.openInputStream(uri) ?: return null
             val bounds = BitmapFactory.Options().apply { inJustDecodeBounds = true }
-            BitmapFactory.decodeStream(contentResolver.openInputStream(uri), null, bounds)
-            inputStream.close()
+            contentResolver.openInputStream(uri)?.use { stream ->
+                BitmapFactory.decodeStream(stream, null, bounds)
+            }
 
             // Safe inSampleSize downscaling to prevent OOM
             val maxBound = 2048
@@ -501,7 +478,9 @@ class EditorViewModel(application: Application) : AndroidViewModel(application) 
             }
 
             val options = BitmapFactory.Options().apply { inSampleSize = sampleSize }
-            BitmapFactory.decodeStream(contentResolver.openInputStream(uri), null, options)
+            contentResolver.openInputStream(uri)?.use { stream ->
+                BitmapFactory.decodeStream(stream, null, options)
+            }
         } catch (e: Exception) {
             Log.e(TAG, "OOM or Stream error loading background", e)
             null
@@ -551,6 +530,7 @@ class EditorViewModel(application: Application) : AndroidViewModel(application) 
             "Red" -> 0xFFE53935.toInt()
             "Blue" -> 0xFF1E88E5.toInt()
             "Green" -> 0xFF4CAF50.toInt()
+            "Islamic Green" -> 0xFF009933.toInt()
             "Yellow" -> 0xFFFFEB3B.toInt()
             "Orange" -> 0xFFFB8C00.toInt()
             "Pink" -> 0xFFE91E63.toInt()
@@ -565,7 +545,7 @@ class EditorViewModel(application: Application) : AndroidViewModel(application) 
     }
 
     private fun isColorLight(colorName: String): Boolean {
-        return colorName in listOf("White", "Yellow", "Pink", "Cyan", "Light Blue", "Light Green")
+        return colorName in listOf("White", "Yellow", "Pink", "Cyan", "Light Blue", "Light Green", "Islamic Green")
     }
 
     private fun getExportQualityInt(qualityStr: String): Int {

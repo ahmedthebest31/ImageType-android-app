@@ -7,6 +7,7 @@
     <string name="color_red">Red</string>
     <string name="color_blue">Blue</string>
     <string name="color_green">Green</string>
+    <string name="color_islamic_green">Islamic Green</string>
     <string name="color_yellow">Yellow</string>
     <string name="color_orange">Orange</string>
     <string name="color_pink">Pink</string>
@@ -59,13 +60,18 @@
     <string name="theme_light">Light Mode</string>
     <string name="theme_system">System Default</string>
 
+    <!-- Navigation Tabs -->
+    <string name="tab_editor">Editor</string>
+    <string name="tab_preview">Preview</string>
+    <string name="tab_settings">Settings</string>
+
     <!-- UI Labels -->
     <string name="paste_success">Text pasted from clipboard</string>
     <string name="paste_error">Could not read from clipboard</string>
     <string name="save_error">Failed to save image</string>
     <string name="share_error">Failed to share image</string>
     <string name="font_size_slider">Font size</string>
-    <string name="font_size_label">Size</string>
+    <string name="font_size_label">Size: %1$d</string>
     <string name="fit_text_checkbox">Fit text to image</string>
     <string name="enable_shadow_label">Shadow</string>
     <string name="input_placeholder">Type your text here…</string>
@@ -99,7 +105,7 @@
     <string name="success_template">Template saved</string>
     <string name="save_template_button">Save Template</string>
     <string name="load_template_label">Load Template</string>
-    <string name="template_loaded">Template loaded</string>
+    <string name="template_loaded">Template "%1$s" loaded</string>
     <string name="about_downloads_button">About &amp; Downloads</string>
     <string name="share_app_button">Share App</string>
     <string name="rate_app_button">Rate the App</string>
