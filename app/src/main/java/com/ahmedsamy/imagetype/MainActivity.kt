@@ -44,6 +44,9 @@ import androidx.compose.ui.hapticfeedback.HapticFeedback
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.semantics.LiveRegionMode
+import androidx.compose.ui.semantics.liveRegion
+import androidx.compose.ui.semantics.semantics
 import com.ahmedsamy.imagetype.util.stringRes
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.LayoutDirection
@@ -115,7 +118,12 @@ fun MainScreen(viewModel: EditorViewModel) {
         val snackbarHostState = remember { SnackbarHostState() }
 
         Scaffold(
-            snackbarHost = { SnackbarHost(snackbarHostState) },
+            snackbarHost = {
+                SnackbarHost(
+                    hostState = snackbarHostState,
+                    modifier = Modifier.semantics { liveRegion = LiveRegionMode.Assertive }
+                )
+            },
             topBar = {
                 TopAppBar(
                     title = {
@@ -146,7 +154,7 @@ fun MainScreen(viewModel: EditorViewModel) {
                             selectedTabIndex = 0
                             if (isHapticsEnabled) haptics.performHapticFeedback(HapticFeedbackType.LongPress)
                         },
-                        icon = { Icon(Icons.Default.Edit, contentDescription = null) },
+                        icon = { Icon(Icons.Default.Edit, contentDescription = stringRes(R.string.tab_editor)) },
                         label = { Text(stringRes(R.string.tab_editor)) },
                         modifier = Modifier.testTag("nav_tab_editor")
                     )
@@ -156,7 +164,7 @@ fun MainScreen(viewModel: EditorViewModel) {
                             selectedTabIndex = 1
                             if (isHapticsEnabled) haptics.performHapticFeedback(HapticFeedbackType.LongPress)
                         },
-                        icon = { Icon(Icons.Default.Image, contentDescription = null) },
+                        icon = { Icon(Icons.Default.Image, contentDescription = stringRes(R.string.tab_preview)) },
                         label = { Text(stringRes(R.string.tab_preview)) },
                         modifier = Modifier.testTag("nav_tab_preview")
                     )
@@ -166,7 +174,7 @@ fun MainScreen(viewModel: EditorViewModel) {
                             selectedTabIndex = 2
                             if (isHapticsEnabled) haptics.performHapticFeedback(HapticFeedbackType.LongPress)
                         },
-                        icon = { Icon(Icons.Default.Settings, contentDescription = null) },
+                        icon = { Icon(Icons.Default.Settings, contentDescription = stringRes(R.string.tab_settings)) },
                         label = { Text(stringRes(R.string.tab_settings)) },
                         modifier = Modifier.testTag("nav_tab_settings")
                     )

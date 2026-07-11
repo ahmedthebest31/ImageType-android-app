@@ -5,6 +5,16 @@ plugins {
     alias(libs.plugins.kotlin.compose)
 }
 
+// ============================================================
+// dependenciesInfo: ALWAYS disabled for both stores.
+// ============================================================
+// The default (includeInApk = true) embeds a Google-encrypted
+// DEPENDENCY_INFO_BLOCK blob into the APK signing block.
+// IzzyOnDroid / F-Droid flag this blob during APK scans and
+// require it to be absent. Google Play does NOT need it either.
+// Setting both to false removes the blob and satisfies both stores.
+// See: https://izzyondroid.org/docs/general/AppInclusionPolicy/
+
 android {
     namespace = "com.ahmedsamy.imagetype"
     compileSdk = 36
@@ -64,6 +74,8 @@ android {
                 signingConfig = null
             }
 
+            // ALWAYS disabled: removes the Google-encrypted DEPENDENCY_INFO_BLOCK
+            // blob from the APK signing block. Required by IzzyOnDroid, safe for Google Play.
             dependenciesInfo {
                 includeInApk = false
                 includeInBundle = false

@@ -30,6 +30,7 @@ import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
+@Suppress("DEPRECATION")
 fun <T> ImageTypeDropdown(
     label: String,
     options: List<T>,

@@ -98,6 +98,8 @@ fun TabEditorWorkspace(viewModel: EditorViewModel, snackbarHostState: SnackbarHo
     val saveErrorText = stringRes(R.string.save_error)
     val shareErrorText = stringRes(R.string.share_error)
     val fontSizeSliderText = stringRes(R.string.font_size_slider)
+    val fontSizeLabelText = stringRes(R.string.font_size_label)
+    val inputPlaceholderText = stringRes(R.string.input_placeholder)
 
     val photoPickerLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.PickVisualMedia(),
@@ -130,7 +132,8 @@ fun TabEditorWorkspace(viewModel: EditorViewModel, snackbarHostState: SnackbarHo
                     onValueChange = { viewModel.setInputText(it) },
                     modifier = Modifier
                         .fillMaxWidth()
-                        .testTag("input_text_field"),
+                        .testTag("input_text_field")
+                        .semantics { contentDescription = inputPlaceholderText },
                     minLines = 3,
                     maxLines = 6,
                     label = { Text(stringRes(R.string.input_placeholder)) },
@@ -162,7 +165,7 @@ fun TabEditorWorkspace(viewModel: EditorViewModel, snackbarHostState: SnackbarHo
                     ) {
                         Icon(
                             Icons.Default.ContentPaste,
-                            contentDescription = null,
+                            contentDescription = stringRes(R.string.paste_button),
                             modifier = Modifier.size(18.dp)
                         )
                         Spacer(Modifier.width(8.dp))
@@ -225,7 +228,7 @@ fun TabEditorWorkspace(viewModel: EditorViewModel, snackbarHostState: SnackbarHo
                                     .testTag("slider_font_size")
                                     .semantics {
                                         contentDescription = fontSizeSliderText
-                                        stateDescription = fontSize.toInt().toString()
+                                        stateDescription = fontSizeLabelText.format(fontSize.toInt())
                                     }
                             )
                         }
@@ -443,7 +446,7 @@ fun TabEditorWorkspace(viewModel: EditorViewModel, snackbarHostState: SnackbarHo
                 shape = RoundedCornerShape(12.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
             ) {
-                Icon(Icons.Default.Save, contentDescription = null)
+                Icon(Icons.Default.Save, contentDescription = stringRes(R.string.save_gallery_button))
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(stringRes(R.string.save_gallery_button), style = MaterialTheme.typography.titleMedium)
             }
@@ -472,7 +475,7 @@ fun TabEditorWorkspace(viewModel: EditorViewModel, snackbarHostState: SnackbarHo
                     modifier = Modifier.semantics(mergeDescendants = true) {},
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Icon(Icons.Default.Share, contentDescription = null)
+                    Icon(Icons.Default.Share, contentDescription = stringRes(R.string.share_image_button))
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(stringRes(R.string.share_image_button), style = MaterialTheme.typography.titleMedium)
                 }
