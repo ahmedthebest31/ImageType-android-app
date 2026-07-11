@@ -13,7 +13,6 @@ captures/
 .externalNativeBuild/
 .cxx/
 *.apk
-*.app
 output.json
 
 # IntelliJ
@@ -34,9 +33,10 @@ google-services.json
 *.keystore
 key.properties
 
+# Project analysis report (not pushed)
+project_analysis_report.md
+
 # Personal files
 *.ps1
 *.py
 commit_msg.txt
-project_analysis_report.md
-project_analysis_report_ar.md

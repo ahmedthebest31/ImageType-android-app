@@ -10,7 +10,7 @@ Thank you for choosing ImageType. This Privacy Policy explains how we handle you
 ## 2. Device Permissions
 To function properly, ImageType requires access to your device's media storage. 
 * **Photo Picker / Storage:** We use the secure Android Photo Picker to allow you to select background images from your gallery. We only access the specific images you explicitly select.
-* **Saving Images:** The app requires permission to save the generated images back to your device's local gallery.
+* **Saving Images:** On Android 9 and below, the app uses the `WRITE_EXTERNAL_STORAGE` permission. On Android 10 and above (API 29+), the app uses the MediaStore API to save images to your gallery, which requires no explicit storage permission.
 
 ## 3. Third-Party Services and Analytics
 ImageType does not integrate any third-party analytics trackers, crash reporting tools, or advertising SDKs. The app is completely ad-free and tracking-free.
