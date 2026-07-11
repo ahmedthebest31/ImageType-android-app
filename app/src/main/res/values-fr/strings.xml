@@ -7,6 +7,7 @@
     <string name="color_red">Rouge</string>
     <string name="color_blue">Bleu</string>
     <string name="color_green">Vert</string>
+    <string name="color_islamic_green">Vert islamique</string>
     <string name="color_yellow">Jaune</string>
     <string name="color_orange">Orange</string>
     <string name="color_pink">Rose</string>
@@ -58,4 +59,58 @@
     <string name="theme_dark">Mode sombre</string>
     <string name="theme_light">Mode clair</string>
     <string name="theme_system">Système par défaut</string>
+
+    <!-- Navigation Tabs -->
+    <string name="tab_editor">Éditeur</string>
+    <string name="tab_preview">Aperçu</string>
+    <string name="tab_settings">Paramètres</string>
+
+    <!-- UI Labels -->
+    <string name="paste_success">Texte collé depuis le presse-papiers</string>
+    <string name="paste_error">Impossible de lire le presse-papiers</string>
+    <string name="save_error">Échec de l\'enregistrement de l\'image</string>
+    <string name="share_error">Échec du partage de l\'image</string>
+    <string name="font_size_slider">Taille de police</string>
+    <string name="font_size_label">Taille : %1$d</string>
+    <string name="fit_text_checkbox">Ajuster le texte à l\'image</string>
+    <string name="enable_shadow_label">Ombre</string>
+    <string name="input_placeholder">Saisissez votre texte ici…</string>
+    <string name="paste_button">Coller</string>
+    <string name="text_position_label">Position</string>
+    <string name="font_family_label">Police</string>
+    <string name="font_style_label">Style</string>
+    <string name="text_color_label">Couleur du texte</string>
+    <string name="dimensions_label">Dimensions</string>
+    <string name="bg_type_label">Arrière-plan</string>
+    <string name="bg_color_label">Couleur d\'arrière-plan</string>
+    <string name="existing_image_button">Choisir une image</string>
+    <string name="bg_selected">Image d\'arrière-plan sélectionnée</string>
+    <string name="image_quality_label">Qualité</string>
+    <string name="error_empty_text">Veuillez saisir un texte d\'abord</string>
+    <string name="success_save">Image enregistrée dans la galerie</string>
+    <string name="save_gallery_button">Enregistrer</string>
+    <string name="share_image_button">Partager</string>
+    <string name="rendering_label">Génération de l\'aperçu…</string>
+    <string name="zoom_out">Dézoomer</string>
+    <string name="zoom_in">Zoomer</string>
+    <string name="zoom_level">Zoom %1$d%%</string>
+    <string name="preview_description">Aperçu de votre texte sur l\'arrière-plan sélectionné</string>
+    <string name="no_preview_available">Aucun aperçu disponible</string>
+
+    <!-- Settings -->
+    <string name="template_name_error">Veuillez saisir un nom de modèle</string>
+    <string name="share_app_title">Partager ImageType</string>
+    <string name="theme_label">Thème</string>
+    <string name="language_label">Langue</string>
+    <string name="haptic_toggle">Retour haptique</string>
+    <string name="template_name_placeholder">Nom du modèle…</string>
+    <string name="success_template">Modèle enregistré</string>
+    <string name="save_template_button">Enregistrer le modèle</string>
+    <string name="load_template_label">Charger un modèle</string>
+    <string name="template_loaded">Modèle \"%1$s\" chargé</string>
+    <string name="delete_template_button">Supprimer</string>
+    <string name="template_deleted">Modèle supprimé</string>
+    <string name="about_downloads_button">À propos et téléchargements</string>
+    <string name="share_app_button">Partager l\'application</string>
+    <string name="rate_app_button">Noter l\'application</string>
 </resources>

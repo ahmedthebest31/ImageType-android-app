@@ -7,6 +7,7 @@
     <string name="color_red">Rosso</string>
     <string name="color_blue">Blu</string>
     <string name="color_green">Verde</string>
+    <string name="color_islamic_green">Verde islamico</string>
     <string name="color_yellow">Giallo</string>
     <string name="color_orange">Arancione</string>
     <string name="color_pink">Rosa</string>
@@ -40,7 +41,7 @@
     <string name="dim_portrait">Verticale/Reels (1080x1920)</string>
     <string name="dim_4_3">4:3 (1024x768)</string>
     <string name="dim_3_4">3:4 (768x1024)</string>
-    <string name="dim_ultrawide">Oltre la larghezza (2560x1080)</string>
+    <string name="dim_ultrawide">Ultra-largo (2560x1080)</string>
     <string name="dim_twitter">Intestazione Twitter (1500x500)</string>
 
     <!-- Qualities -->
@@ -58,4 +59,58 @@
     <string name="theme_dark">Modalità scura</string>
     <string name="theme_light">Modalità chiara</string>
     <string name="theme_system">Predefinito di sistema</string>
+
+    <!-- Navigation Tabs -->
+    <string name="tab_editor">Editor</string>
+    <string name="tab_preview">Anteprima</string>
+    <string name="tab_settings">Impostazioni</string>
+
+    <!-- UI Labels -->
+    <string name="paste_success">Testo incollato dagli appunti</string>
+    <string name="paste_error">Impossibile leggere dagli appunti</string>
+    <string name="save_error">Impossibile salvare l\'immagine</string>
+    <string name="share_error">Impossibile condividere l\'immagine</string>
+    <string name="font_size_slider">Dimensione carattere</string>
+    <string name="font_size_label">Dimensione: %1$d</string>
+    <string name="fit_text_checkbox">Adatta il testo all\'immagine</string>
+    <string name="enable_shadow_label">Ombra</string>
+    <string name="input_placeholder">Scrivi il tuo testo qui…</string>
+    <string name="paste_button">Incolla</string>
+    <string name="text_position_label">Posizione</string>
+    <string name="font_family_label">Carattere</string>
+    <string name="font_style_label">Stile</string>
+    <string name="text_color_label">Colore del testo</string>
+    <string name="dimensions_label">Dimensioni</string>
+    <string name="bg_type_label">Sfondo</string>
+    <string name="bg_color_label">Colore dello sfondo</string>
+    <string name="existing_image_button">Scegli immagine</string>
+    <string name="bg_selected">Immagine di sfondo selezionata</string>
+    <string name="image_quality_label">Qualità</string>
+    <string name="error_empty_text">Inserisci del testo prima</string>
+    <string name="success_save">Immagine salvata nella galleria</string>
+    <string name="save_gallery_button">Salva</string>
+    <string name="share_image_button">Condividi</string>
+    <string name="rendering_label">Generazione anteprima…</string>
+    <string name="zoom_out">Riduci zoom</string>
+    <string name="zoom_in">Ingrandisci</string>
+    <string name="zoom_level">Zoom %1$d%%</string>
+    <string name="preview_description">Anteprima del testo sullo sfondo selezionato</string>
+    <string name="no_preview_available">Nessuna anteprima disponibile</string>
+
+    <!-- Settings -->
+    <string name="template_name_error">Inserisci un nome per il modello</string>
+    <string name="share_app_title">Condividi ImageType</string>
+    <string name="theme_label">Tema</string>
+    <string name="language_label">Lingua</string>
+    <string name="haptic_toggle">Feedback aptico</string>
+    <string name="template_name_placeholder">Nome del modello…</string>
+    <string name="success_template">Modello salvato</string>
+    <string name="save_template_button">Salva modello</string>
+    <string name="load_template_label">Carica modello</string>
+    <string name="template_loaded">Modello \"%1$s\" caricato</string>
+    <string name="delete_template_button">Elimina</string>
+    <string name="template_deleted">Modello eliminato</string>
+    <string name="about_downloads_button">Informazioni e download</string>
+    <string name="share_app_button">Condividi l\'app</string>
+    <string name="rate_app_button">Valuta l\'app</string>
 </resources>

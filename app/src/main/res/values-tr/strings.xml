@@ -7,6 +7,7 @@
     <string name="color_red">Kırmızı</string>
     <string name="color_blue">Mavi</string>
     <string name="color_green">Yeşil</string>
+    <string name="color_islamic_green">İslam Yeşili</string>
     <string name="color_yellow">Sarı</string>
     <string name="color_orange">Turuncu</string>
     <string name="color_pink">Pembe</string>
@@ -58,4 +59,58 @@
     <string name="theme_dark">Karanlık Mod</string>
     <string name="theme_light">Aydınlık Mod</string>
     <string name="theme_system">Sistem Varsayılanı</string>
+
+    <!-- Navigation Tabs -->
+    <string name="tab_editor">Editör</string>
+    <string name="tab_preview">Önizleme</string>
+    <string name="tab_settings">Ayarlar</string>
+
+    <!-- UI Labels -->
+    <string name="paste_success">Metin panodan yapıştırıldı</string>
+    <string name="paste_error">Panodan okunamadı</string>
+    <string name="save_error">Görsel kaydedilemedi</string>
+    <string name="share_error">Görsel paylaşılamadı</string>
+    <string name="font_size_slider">Yazı tipi boyutu</string>
+    <string name="font_size_label">Boyut: %1$d</string>
+    <string name="fit_text_checkbox">Metni görsele sığdır</string>
+    <string name="enable_shadow_label">Gölge</string>
+    <string name="input_placeholder">Metninizi buraya yazın…</string>
+    <string name="paste_button">Yapıştır</string>
+    <string name="text_position_label">Konum</string>
+    <string name="font_family_label">Yazı tipi</string>
+    <string name="font_style_label">Stil</string>
+    <string name="text_color_label">Metin rengi</string>
+    <string name="dimensions_label">Boyutlar</string>
+    <string name="bg_type_label">Arka plan</string>
+    <string name="bg_color_label">Arka plan rengi</string>
+    <string name="existing_image_button">Görsel seç</string>
+    <string name="bg_selected">Arka plan görseli seçildi</string>
+    <string name="image_quality_label">Kalite</string>
+    <string name="error_empty_text">Lütfen önce bir metin girin</string>
+    <string name="success_save">Görsel galeriye kaydedildi</string>
+    <string name="save_gallery_button">Kaydet</string>
+    <string name="share_image_button">Paylaş</string>
+    <string name="rendering_label">Önizleme oluşturuluyor…</string>
+    <string name="zoom_out">Uzaklaştır</string>
+    <string name="zoom_in">Yakınlaştır</string>
+    <string name="zoom_level">Yakınlaştırma %1$d%%</string>
+    <string name="preview_description">Seçili arka plan üzerinde metninizin önizlemesi</string>
+    <string name="no_preview_available">Önizleme mevcut değil</string>
+
+    <!-- Settings -->
+    <string name="template_name_error">Lütfen bir şablon adı girin</string>
+    <string name="share_app_title">ImageType\'ı paylaş</string>
+    <string name="theme_label">Tema</string>
+    <string name="language_label">Dil</string>
+    <string name="haptic_toggle">Dokunsal geri bildirim</string>
+    <string name="template_name_placeholder">Şablon adı…</string>
+    <string name="success_template">Şablon kaydedildi</string>
+    <string name="save_template_button">Şablonu kaydet</string>
+    <string name="load_template_label">Şablon yükle</string>
+    <string name="template_loaded">\"%1$s\" şablonu yüklendi</string>
+    <string name="delete_template_button">Sil</string>
+    <string name="template_deleted">Şablon silindi</string>
+    <string name="about_downloads_button">Hakkında ve indirmeler</string>
+    <string name="share_app_button">Uygulamayı paylaş</string>
+    <string name="rate_app_button">Uygulamayı değerlendir</string>
 </resources>

@@ -7,6 +7,7 @@
     <string name="color_red">Rojo</string>
     <string name="color_blue">Azul</string>
     <string name="color_green">Verde</string>
+    <string name="color_islamic_green">Verde islámico</string>
     <string name="color_yellow">Amarillo</string>
     <string name="color_orange">Naranja</string>
     <string name="color_pink">Rosa</string>
@@ -40,7 +41,7 @@
     <string name="dim_portrait">Vertical/Reels (1080x1920)</string>
     <string name="dim_4_3">4:3 (1024x768)</string>
     <string name="dim_3_4">3:4 (768x1024)</string>
-    <string name="dim_ultrawide">Ultrawide (2560x1080)</string>
+    <string name="dim_ultrawide">Ultra ancho (2560x1080)</string>
     <string name="dim_twitter">Encabezado de Twitter (1500x500)</string>
 
     <!-- Qualities -->
@@ -58,4 +59,58 @@
     <string name="theme_dark">Modo oscuro</string>
     <string name="theme_light">Modo claro</string>
     <string name="theme_system">Predeterminado del sistema</string>
+
+    <!-- Navigation Tabs -->
+    <string name="tab_editor">Editor</string>
+    <string name="tab_preview">Vista previa</string>
+    <string name="tab_settings">Configuración</string>
+
+    <!-- UI Labels -->
+    <string name="paste_success">Texto pegado desde el portapapeles</string>
+    <string name="paste_error">No se pudo leer del portapapeles</string>
+    <string name="save_error">Error al guardar la imagen</string>
+    <string name="share_error">Error al compartir la imagen</string>
+    <string name="font_size_slider">Tamaño de fuente</string>
+    <string name="font_size_label">Tamaño: %1$d</string>
+    <string name="fit_text_checkbox">Ajustar texto a la imagen</string>
+    <string name="enable_shadow_label">Sombra</string>
+    <string name="input_placeholder">Escribe tu texto aquí…</string>
+    <string name="paste_button">Pegar</string>
+    <string name="text_position_label">Posición</string>
+    <string name="font_family_label">Fuente</string>
+    <string name="font_style_label">Estilo</string>
+    <string name="text_color_label">Color del texto</string>
+    <string name="dimensions_label">Dimensiones</string>
+    <string name="bg_type_label">Fondo</string>
+    <string name="bg_color_label">Color de fondo</string>
+    <string name="existing_image_button">Elegir imagen</string>
+    <string name="bg_selected">Imagen de fondo seleccionada</string>
+    <string name="image_quality_label">Calidad</string>
+    <string name="error_empty_text">Por favor, introduce un texto primero</string>
+    <string name="success_save">Imagen guardada en la galería</string>
+    <string name="save_gallery_button">Guardar</string>
+    <string name="share_image_button">Compartir</string>
+    <string name="rendering_label">Generando vista previa…</string>
+    <string name="zoom_out">Reducir zoom</string>
+    <string name="zoom_in">Ampliar</string>
+    <string name="zoom_level">Zoom %1$d%%</string>
+    <string name="preview_description">Vista previa de tu texto sobre el fondo seleccionado</string>
+    <string name="no_preview_available">Vista previa no disponible</string>
+
+    <!-- Settings -->
+    <string name="template_name_error">Por favor, introduce un nombre para la plantilla</string>
+    <string name="share_app_title">Compartir ImageType</string>
+    <string name="theme_label">Tema</string>
+    <string name="language_label">Idioma</string>
+    <string name="haptic_toggle">Respuesta háptica</string>
+    <string name="template_name_placeholder">Nombre de la plantilla…</string>
+    <string name="success_template">Plantilla guardada</string>
+    <string name="save_template_button">Guardar plantilla</string>
+    <string name="load_template_label">Cargar plantilla</string>
+    <string name="template_loaded">Plantilla \"%1$s\" cargada</string>
+    <string name="delete_template_button">Eliminar</string>
+    <string name="template_deleted">Plantilla eliminada</string>
+    <string name="about_downloads_button">Acerca de y descargas</string>
+    <string name="share_app_button">Compartir la app</string>
+    <string name="rate_app_button">Calificar la app</string>
 </resources>
