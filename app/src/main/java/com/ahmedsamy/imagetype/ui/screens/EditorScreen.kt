@@ -220,7 +220,10 @@ fun TabEditorWorkspace(viewModel: EditorViewModel, snackbarHostState: SnackbarHo
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .testTag("slider_font_size")
-                                    .semantics { contentDescription = "$fontSizeSliderText: ${fontSize.toInt()}" }
+                                    .semantics {
+                                        contentDescription = fontSizeSliderText
+                                        stateDescription = fontSize.toInt().toString()
+                                    }
                             )
                         }
 

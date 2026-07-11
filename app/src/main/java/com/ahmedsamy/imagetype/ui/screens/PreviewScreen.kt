@@ -137,7 +137,7 @@ fun TabLivePreviewWorkspace(viewModel: EditorViewModel) {
             ) {
                 Icon(
                     Icons.Default.Panorama,
-                    contentDescription = null,
+                    contentDescription = stringRes(R.string.no_preview_available),
                     modifier = Modifier.size(72.dp),
                     tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.4f)
                 )
