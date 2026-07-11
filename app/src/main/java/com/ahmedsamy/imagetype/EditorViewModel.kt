@@ -2,6 +2,7 @@ package com.ahmedsamy.imagetype
 
 import android.app.Application
 import android.graphics.Bitmap
+import android.graphics.Typeface
 import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
@@ -34,11 +35,20 @@ class EditorViewModel(application: Application) : AndroidViewModel(application) 
     private val _textPosition = MutableStateFlow(TextPosition.Center)
     val textPosition: StateFlow<TextPosition> = _textPosition.asStateFlow()
 
-    private val _fontFamily = MutableStateFlow("Amiri")
+    private val _fontFamily = MutableStateFlow("Cairo")
     val fontFamily: StateFlow<String> = _fontFamily.asStateFlow()
 
     private val _fontStyle = MutableStateFlow(FontStyle.Regular)
     val fontStyle: StateFlow<FontStyle> = _fontStyle.asStateFlow()
+
+    private val _resolvedTypeface = MutableStateFlow<Typeface?>(null)
+    val resolvedTypeface: StateFlow<Typeface?> = _resolvedTypeface.asStateFlow()
+
+    private val _isFontLoading = MutableStateFlow(false)
+    val isFontLoading: StateFlow<Boolean> = _isFontLoading.asStateFlow()
+
+    private val _loadingFontName = MutableStateFlow("")
+    val loadingFontName: StateFlow<String> = _loadingFontName.asStateFlow()
 
     private val _textColor = MutableStateFlow(TextColor.White)
     val textColor: StateFlow<TextColor> = _textColor.asStateFlow()
@@ -101,6 +111,8 @@ class EditorViewModel(application: Application) : AndroidViewModel(application) 
             }
         }
 
+        viewModelScope.launch { resolveCurrentTypeface() }
+
         viewModelScope.launch {
             combine(
                 _inputText, _fitText, _fontSize, _textPosition, _fontFamily,
@@ -119,8 +131,28 @@ class EditorViewModel(application: Application) : AndroidViewModel(application) 
     fun setFitText(fit: Boolean) { _fitText.value = fit }
     fun setFontSize(size: Float) { _fontSize.value = size }
     fun setTextPosition(position: TextPosition) { _textPosition.value = position }
-    fun setFontFamily(family: String) { _fontFamily.value = family }
-    fun setFontStyle(style: FontStyle) { _fontStyle.value = style }
+    fun setFontFamily(family: String) {
+        viewModelScope.launch {
+            _isFontLoading.value = true
+            _loadingFontName.value = family
+            _fontFamily.value = family
+            resolveCurrentTypeface()
+            _isFontLoading.value = false
+        }
+    }
+
+    fun setFontStyle(style: FontStyle) {
+        _fontStyle.value = style
+        viewModelScope.launch { resolveCurrentTypeface() }
+    }
+
+    private suspend fun resolveCurrentTypeface() {
+        val context = getApplication<Application>().applicationContext
+        val family = _fontFamily.value
+        val style = _fontStyle.value.androidTypefaceStyle
+        val isArabic = FontManager.containsArabic(_inputText.value)
+        _resolvedTypeface.value = FontManager.resolveTypeface(context, family, style, isArabic)
+    }
     fun setTextColor(color: TextColor) { _textColor.value = color }
     fun setTextShadow(shadow: Boolean) { _textShadow.value = shadow }
     fun setDimensions(dim: ImageDimensions) { _dimensions.value = dim }
@@ -193,7 +225,12 @@ class EditorViewModel(application: Application) : AndroidViewModel(application) 
             _bgType.value = BgType.fromValue(template.bgType)
             _bgImageUri.value = null
         }
-        generateImage()
+        viewModelScope.launch {
+            _isFontLoading.value = true
+            _loadingFontName.value = template.fontFamily
+            resolveCurrentTypeface()
+            _isFontLoading.value = false
+        }
     }
 
     fun deleteTemplate(template: Template) {
@@ -223,7 +260,8 @@ class EditorViewModel(application: Application) : AndroidViewModel(application) 
                     dimensions = _dimensions.value,
                     bgType = _bgType.value,
                     bgColor = _bgColor.value,
-                    bgImageUri = _bgImageUri.value
+                    bgImageUri = _bgImageUri.value,
+                    resolvedTypeface = _resolvedTypeface.value
                 )
                 _generatedBitmap.value = bitmap
             } catch (e: Exception) {

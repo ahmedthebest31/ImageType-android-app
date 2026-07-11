@@ -8,7 +8,8 @@ Thank you for choosing ImageType. This Privacy Policy explains how we handle you
 **We do not collect, store, or transmit any personal data.** ImageType operates 100% locally on your device. All image processing, text rendering, and file saving happen directly on your smartphone. We do not use remote servers to process your images, and we do not track your usage.
 
 ## 2. Device Permissions
-To function properly, ImageType requires access to your device's media storage. 
+To function properly, ImageType requires the following permissions:
+* **Internet:** Used solely to download additional font files (e.g., Open Sans, Montserrat, Lato) from Google Fonts when you select a font that is not bundled with the app. These fonts are cached locally after the first download and never downloaded again. No personal data, images, or text is transmitted during this process.
 * **Photo Picker / Storage:** We use the secure Android Photo Picker to allow you to select background images from your gallery. We only access the specific images you explicitly select.
 * **Saving Images:** On Android 9 and below, the app uses the `WRITE_EXTERNAL_STORAGE` permission. On Android 10 and above (API 29+), the app uses the MediaStore API to save images to your gallery, which requires no explicit storage permission.
 

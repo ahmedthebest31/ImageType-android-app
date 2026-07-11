@@ -8,6 +8,7 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.PorterDuff
 import android.graphics.RectF
+import android.graphics.Typeface
 import android.net.Uri
 import android.text.Layout
 import android.text.StaticLayout
@@ -33,7 +34,8 @@ class ImageGenerator(private val context: Context) {
         dimensions: ImageDimensions,
         bgType: BgType,
         bgColor: TextColor,
-        bgImageUri: Uri?
+        bgImageUri: Uri?,
+        resolvedTypeface: Typeface? = null
     ): Bitmap? {
         return try {
             val width = dimensions.width
@@ -46,7 +48,8 @@ class ImageGenerator(private val context: Context) {
 
             val textPaint = TextPaint(Paint.ANTI_ALIAS_FLAG)
             val isArabic = FontManager.containsArabic(inputText)
-            val typeface = FontManager.getTypeface(context, fontFamily, fontStyle.androidTypefaceStyle, isArabic)
+            val typeface = resolvedTypeface
+                ?: FontManager.getTypeface(context, fontFamily, fontStyle.androidTypefaceStyle, isArabic)
             textPaint.typeface = typeface
 
             val paddingX = width * 0.08f

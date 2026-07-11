@@ -80,6 +80,7 @@
     <string name="text_position_label">Position</string>
     <string name="font_family_label">Schriftart</string>
     <string name="font_style_label">Stil</string>
+    <string name="font_loading">%1$s wird geladen…</string>
     <string name="text_color_label">Textfarbe</string>
     <string name="dimensions_label">Abmessungen</string>
     <string name="bg_type_label">Hintergrund</string>

@@ -35,6 +35,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -87,6 +88,8 @@ fun TabEditorWorkspace(viewModel: EditorViewModel, snackbarHostState: SnackbarHo
     val bgColor by viewModel.bgColor.collectAsState()
     val bgImageUri by viewModel.bgImageUri.collectAsState()
     val imageQuality by viewModel.imageQuality.collectAsState()
+    val isFontLoading by viewModel.isFontLoading.collectAsState()
+    val loadingFontName by viewModel.loadingFontName.collectAsState()
 
     val context = LocalContext.current
 
@@ -248,6 +251,31 @@ fun TabEditorWorkspace(viewModel: EditorViewModel, snackbarHostState: SnackbarHo
                     hapticFeedback = hapticFeedback,
                     hapticsEnabled = hapticsEnabled
                 )
+
+                AnimatedVisibility(
+                    visible = isFontLoading,
+                    enter = expandVertically() + fadeIn(),
+                    exit = shrinkVertically() + fadeOut()
+                ) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 4.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        CircularProgressIndicator(
+                            modifier = Modifier.size(16.dp),
+                            strokeWidth = 2.dp,
+                            color = MaterialTheme.colorScheme.primary
+                        )
+                        Spacer(Modifier.width(8.dp))
+                        Text(
+                            text = stringRes(R.string.font_loading, loadingFontName),
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                }
 
                 ImageTypeDropdown(
                     label = stringRes(R.string.font_style_label),

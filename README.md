@@ -24,7 +24,7 @@
 
 ## 📖 Overview
 
-Looking for a fast, easy, and fully accessible way to add text to your images? **ImageType** is your ultimate solution, built on a groundbreaking "Blind-First" philosophy. The interface is clean, simple, and intuitive — equally suitable for blind users relying on TalkBack and sighted users who prefer a straightforward, distraction-free experience. ImageType is fully offline, requires zero permissions, collects no data, and uses zero AI — every operation relies on deterministic computational algorithms, from binary search font sizing to precise coordinate-based rendering.
+Looking for a fast, easy, and fully accessible way to add text to your images? **ImageType** is your ultimate solution, built on a groundbreaking "Blind-First" philosophy. The interface is clean, simple, and intuitive — equally suitable for blind users relying on TalkBack and sighted users who prefer a straightforward, distraction-free experience. ImageType is fully offline, requires minimal permissions, collects no data, and uses zero AI — every operation relies on deterministic computational algorithms, from binary search font sizing to precise coordinate-based rendering.
 
 > 💻 **ImageType is also available on Desktop!** Download the Windows, macOS, or Linux version from the [official website](https://ahmedthebest31.github.io/ImageType/) or visit the [desktop repository](https://github.com/ahmedthebest31/ImageType).
 
@@ -40,7 +40,7 @@ Looking for a fast, easy, and fully accessible way to add text to your images? *
 
 ### 🌍 Text & Typography
 - **Complex Multilingual Text & Emojis** — Type in any global language! Flawlessly mix complex **Right-to-Left (RTL)** languages like Arabic with English on the exact same image, plus full support for all **Emojis**.
-- **Smart Font Fallback** — Say goodbye to broken characters! If you select an English font but type in Arabic, the app automatically falls back to embedded high-quality fonts like **Amiri** and **Cairo**.
+- **Smart Font System** — Cairo and Amiri are bundled for instant use. System fonts like Roboto are available directly. Additional fonts (Open Sans, Montserrat, Lato, Oswald, Raleway, Noto Sans Arabic) are downloaded on-demand when selected and cached locally — no re-download needed. If you select an English font but type in Arabic, the app automatically falls back to **Amiri**.
 - **Auto Fit Text (Binary Search Sizing)** — Just check the **"Fit Text"** box, and our smart algorithm instantly calculates the absolute maximum font size to fit your text perfectly within the image boundaries. ⚡
 
 ### 🎨 Customization
@@ -59,9 +59,9 @@ Looking for a fast, easy, and fully accessible way to add text to your images? *
 
 ## 🔒 Privacy & Permissions
 
-- ✅ **Zero Permissions Required** — ImageType does NOT request access to your storage, camera, contacts, or location. The only time the app interacts with your files is when you explicitly tap **"Load Image"** — this opens Android's built-in system Photo Picker, which lets you choose an image without granting blanket storage access to the app. Your files stay yours.
+- ✅ **Minimal Permissions** — ImageType only requires INTERNET permission to optionally download additional font files when you select a font not bundled with the app. These fonts are cached locally and never downloaded again. No personal data, images, or text is transmitted. The secure Android Photo Picker is used for selecting background images — no blanket storage access is granted.
 - ✅ **No Data Collection** — ImageType collects nothing. No telemetry, no analytics, no crash reports, no personal information — zero.
-- ✅ **No Internet Required** — The app works completely offline. No tracking, no ads, no remote servers. Your images and text never leave your device.
+- ✅ **Minimal Internet Usage** — The app works fully offline for all core features. Internet is only used once per additional font to download it from Google Fonts. No tracking, no ads, no remote servers. Your images and text never leave your device.
 - ✅ **Zero AI** — ImageType relies entirely on deterministic computational algorithms — binary search for font sizing, coordinate math for positioning, and direct pixel manipulation for rendering. No neural networks, no cloud processing, no machine learning. Every operation is predictable, transparent, and instant.
 - ✅ **100% Free, ad-free & open-source** — Fully transparent. No hidden agendas. No premium features — everything is free and always will be.
 - ✅ **GPLv3 Licensed** — Compatible with **F-Droid** and **IzzyOnDroid** repositories. No proprietary dependencies or tracking SDKs.

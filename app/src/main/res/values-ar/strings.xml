@@ -80,6 +80,7 @@
     <string name="text_position_label">الموضع</string>
     <string name="font_family_label">الخط</string>
     <string name="font_style_label">النمط</string>
+    <string name="font_loading">جارٍ تحميل %1$s…</string>
     <string name="text_color_label">لون النص</string>
     <string name="dimensions_label">الأبعاد</string>
     <string name="bg_type_label">الخلفية</string>
