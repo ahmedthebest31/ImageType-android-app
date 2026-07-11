@@ -45,8 +45,7 @@ Looking for a fast, easy, and fully accessible way to add text to your images? *
 
 ### 🎨 Customization
 - **Limitless Text Customization** — Control text position (9 absolute anchors), size, font styles (**Bold, Italic**), and choose from a massive palette of text and background colors.
-- **Adaptive Text Shadow** — Ensure your text is always readable. The app automatically applies the perfect shadow contrast based on your selected text color.
-- **Text Shadows & Outlines** — Optional drop shadows and automatic adaptive outlining for high-contrast visibility against complex backgrounds.
+- **Adaptive Text Shadow** — Ensure your text is always readable. The app automatically applies a high-contrast shadow or outline based on your selected text color for visibility against any background.
 
 ### 🖼️ Canvas & Backgrounds
 - **Multiple Canvas Sizes** — Generate **Standard HD**, **Square (1:1)**, **Portrait / Reels (9:16)**, or load any custom background image directly from your gallery using the secure **Android Photo Picker**.

@@ -1,41 +1,51 @@
-Looking for a fast, easy, and fully accessible way to add text to your images? ImageType is your ultimate solution, built on a groundbreaking "Blind-First" philosophy. The interface is clean, simple, and intuitive — equally suitable for blind users relying on TalkBack and sighted users who prefer a straightforward, distraction-free experience. ImageType is fully offline, requires minimal permissions, collects no data, and uses zero AI — every operation relies on deterministic computational algorithms, from binary search font sizing to precise coordinate-based rendering.
+Add custom text to any image with a fully accessible, privacy-first editor. ImageType was designed from the ground up for blind and sighted users alike — clean interface, zero clutter, works entirely on your device.
 
-🌟 PERFECT FOR EVERY USE CASE
+PERFECT FOR
 
-* Design elegant greeting cards for holidays and occasions.
-* Craft engaging social media posts, promotional ads, and quotes.
-* Create beautiful WhatsApp, Facebook, or Instagram stories and statuses.
-* Add Quranic verses, poetry, or daily typography to custom backgrounds.
+* Greeting cards for holidays and special occasions.
+* Social media posts, quotes, and promotional content.
+* WhatsApp, Facebook, and Instagram stories.
+* Arabic calligraphy, Quranic verses, and poetry on custom backgrounds.
+* YouTube and Reels thumbnail text overlays.
 
-🌟 KEY FEATURES
+ACCESSIBILITY
 
-* Blind-First & Fully Screen-Reader Accessible: Every button, menu, and setting is carefully labeled and logically grouped for a seamless TalkBack experience. No visual clutter, just pure productivity.
-* Multilingual Interface: Navigate comfortably in Arabic, English, French, Italian, Spanish, German, and Turkish.
-* Complex Multilingual Text & Emojis: Type in any global language! Flawlessly mix Right-to-Left (RTL) Arabic with English on the same image, plus full Emoji support.
-* Smart Font System: Cairo and Amiri are bundled for instant use. System fonts like Roboto are available directly. Additional fonts (Open Sans, Montserrat, Lato, Oswald, Raleway, Noto Sans Arabic) are downloaded on-demand when selected and cached locally. If you select an English font but type in Arabic, the app automatically falls back to Amiri.
-* Auto Fit Text (Binary Search Sizing): Check the "Fit Text" box, and our algorithm instantly calculates the maximum font size to fit your text perfectly within the image boundaries.
-* Limitless Customization: Control text position (9 anchors), size, font styles (Bold, Italic), and choose from a massive palette of text and background colors.
-* Adaptive Text Shadow: The app automatically applies the perfect shadow contrast based on your selected text color for optimal readability.
-* Multiple Canvas Sizes: Standard HD, Square (1:1), Portrait/Reels (9:16), or load a custom background via the secure Android Photo Picker.
-* Save & Load Templates: Save your favorite typography setups and load them instantly for your next design.
-* Quick Share Integration: Receive text from other apps (like WhatsApp) via the Share menu, and share the final image without cluttering your gallery.
+* Built for TalkBack from day one — every button, slider, and menu is properly labeled.
+* Sliders announce their current value. Checkboxes read "On" and "Off."
+* Live region announcements for image generation status.
+* Available in Arabic, English, French, Italian, Spanish, German, and Turkish.
 
-🔒 PRIVACY & PERMISSIONS
+TEXT & FONTS
 
-* Minimal Permissions: ImageType only requires INTERNET permission to optionally download additional font files when you select a font not bundled with the app. These fonts are cached locally and never downloaded again. No personal data, images, or text is transmitted. The secure Android Photo Picker is used for selecting background images.
-* No Data Collection: ImageType collects nothing. No telemetry, no analytics, no crash reports, no personal information — zero.
-* Minimal Internet Usage: The app works fully offline for all core features. Internet is only used once per additional font to download it from Google Fonts. No tracking, no ads, no remote servers. Your images and text never leave your device.
-* Zero AI: ImageType relies entirely on deterministic computational algorithms — binary search for font sizing, coordinate math for positioning, and direct pixel manipulation for rendering. No neural networks, no cloud processing, no machine learning. Every operation is predictable, transparent, and instant.
+* Type in any language — mix RTL Arabic with LTR English on a single image. Full emoji support included.
+* Cairo and Amiri bundled for instant use. System fonts like Roboto available out of the box. Additional fonts (Open Sans, Montserrat, Lato, Oswald, Raleway, Noto Sans Arabic) download on first use and cache locally.
+* Auto Fit Text calculates the largest possible font size to fill your image — one checkbox, instant result.
+* Nine position anchors, adjustable size, Bold and Italic styles, fifteen text and background colors.
 
-🔓 100% FREE & OPEN SOURCE
+CANVAS & BACKGROUNDS
 
-ImageType is completely free, ad-free, and open-source. We believe in building transparent tools that empower the community.
+* Eight preset dimensions: Standard HD, Square, Portrait/Reels, Ultrawide, Twitter Header, and more.
+* Transparent background support for overlay graphics.
+* Pick any photo from your gallery through Android's built-in Photo Picker — no blanket storage access.
 
-Contribute or view the source code on GitHub:
-https://github.com/ahmedthebest31/ImageType-android-app
+PRODUCTIVITY
 
-💻 ALSO AVAILABLE ON DESKTOP
+* Save and load custom templates. Switch between designs instantly.
+* Share text from other apps via the Android Share menu, and share the final image directly without saving to your gallery.
 
-ImageType is also available as a powerful, standalone desktop application for Windows, macOS, and Linux!
-Download the Desktop versions and view its source code:
-https://ahmedthebest31.github.io/ImageType/
+PRIVACY
+
+* No data collection. No telemetry, no analytics, no crash reports.
+* No tracking, no ads, no remote servers.
+* INTERNET permission is used only to download extra font files from Google Fonts. Fonts cache locally after the first download.
+* Fully offline for every core feature. Your images and text never leave your device.
+
+FREE & OPEN SOURCE
+
+* 100% free with no premium tier. GPLv3 licensed. Source code on GitHub:
+  https://github.com/ahmedthebest31/ImageType-android-app
+
+ALSO ON DESKTOP
+
+* Windows, macOS, and Linux versions available at:
+  https://ahmedthebest31.github.io/ImageType/

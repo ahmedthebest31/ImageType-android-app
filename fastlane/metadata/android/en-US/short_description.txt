@@ -1,1 +1,1 @@
-Text-on-image: blind-first, offline, private, 0% AI, 0 perms.
+Text-on-image: blind-first, offline, private, zero AI, minimal perms.
