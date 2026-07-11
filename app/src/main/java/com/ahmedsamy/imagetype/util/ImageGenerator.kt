@@ -62,13 +62,14 @@ class ImageGenerator(private val context: Context) {
             val maxTextWidth = (width - (paddingX * 2)).coerceAtLeast(100f)
             val maxTextHeight = (height - (paddingY * 2)).coerceAtLeast(100f)
 
+            val textAlignment = getLayoutAlignment(textPosition, isArabic)
+
             var finalFontSize = fontSize
             if (fitText) {
-                finalFontSize = binarySearchBestFontSize(inputText, maxTextWidth, maxTextHeight, textPaint)
+                finalFontSize = binarySearchBestFontSize(inputText, maxTextWidth, maxTextHeight, textPaint, textAlignment)
             }
             textPaint.textSize = finalFontSize
 
-            val textAlignment = getLayoutAlignment(textPosition, isArabic)
             val textDir = if (FontManager.containsArabic(inputText)) {
                 TextDirectionHeuristics.FIRSTSTRONG_LTR
             } else {
@@ -133,6 +134,7 @@ class ImageGenerator(private val context: Context) {
         maxWidth: Float,
         maxHeight: Float,
         paint: TextPaint,
+        alignment: Layout.Alignment,
         minSize: Float = 10f,
         maxSize: Float = 400f
     ): Float {
@@ -148,7 +150,7 @@ class ImageGenerator(private val context: Context) {
                 TextDirectionHeuristics.LOCALE
             }
             val testLayout = StaticLayout.Builder.obtain(text, 0, text.length, paint, maxWidth.toInt())
-                .setAlignment(Layout.Alignment.ALIGN_NORMAL)
+                .setAlignment(alignment)
                 .setTextDirection(testTextDir)
                 .setLineSpacing(0f, 1.1f)
                 .setIncludePad(false)

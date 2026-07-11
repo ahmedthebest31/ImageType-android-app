@@ -106,6 +106,8 @@
     <string name="save_template_button">Save Template</string>
     <string name="load_template_label">Load Template</string>
     <string name="template_loaded">Template "%1$s" loaded</string>
+    <string name="delete_template_button">Delete</string>
+    <string name="template_deleted">Template deleted</string>
     <string name="about_downloads_button">About &amp; Downloads</string>
     <string name="share_app_button">Share App</string>
     <string name="rate_app_button">Rate the App</string>

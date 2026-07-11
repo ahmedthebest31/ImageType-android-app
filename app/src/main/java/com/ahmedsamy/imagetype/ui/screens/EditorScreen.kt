@@ -3,7 +3,6 @@ package com.ahmedsamy.imagetype.ui.screens
 import android.content.ClipDescription
 import android.content.ClipboardManager
 import android.content.Context
-import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -40,10 +39,12 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Slider
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -60,12 +61,14 @@ import com.ahmedsamy.imagetype.EditorViewModel
 import com.ahmedsamy.imagetype.FontManager
 import com.ahmedsamy.imagetype.R
 import com.ahmedsamy.imagetype.ui.components.ImageTypeDropdown
+import kotlinx.coroutines.launch
 
 @Composable
-fun TabEditorWorkspace(viewModel: EditorViewModel) {
+fun TabEditorWorkspace(viewModel: EditorViewModel, snackbarHostState: SnackbarHostState) {
     val scrollState = rememberScrollState()
     val hapticFeedback = LocalHapticFeedback.current
     val hapticsEnabled by viewModel.hapticsEnabled.collectAsState()
+    val scope = rememberCoroutineScope()
 
     val inputText by viewModel.inputText.collectAsState()
     val fitText by viewModel.fitText.collectAsState()
@@ -138,10 +141,10 @@ fun TabEditorWorkspace(viewModel: EditorViewModel) {
                             val pasteText = item?.text?.toString() ?: ""
                             if (pasteText.isNotBlank()) {
                                 viewModel.setInputText(inputText + pasteText)
-                                Toast.makeText(context, pasteSuccessText, Toast.LENGTH_SHORT).show()
+                                scope.launch { snackbarHostState.showSnackbar(pasteSuccessText) }
                             }
                         } else {
-                            Toast.makeText(context, pasteErrorText, Toast.LENGTH_SHORT).show()
+                            scope.launch { snackbarHostState.showSnackbar(pasteErrorText) }
                         }
                     },
                     modifier = Modifier.align(Alignment.End),
@@ -405,13 +408,13 @@ fun TabEditorWorkspace(viewModel: EditorViewModel) {
                 onClick = {
                     if (hapticsEnabled) hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)
                     if (inputText.isBlank()) {
-                        Toast.makeText(context, errorText, Toast.LENGTH_SHORT).show()
+                        scope.launch { snackbarHostState.showSnackbar(errorText) }
                     } else {
                         viewModel.saveImageToGallery { success ->
                             if (success) {
-                                Toast.makeText(context, successSaveText, Toast.LENGTH_LONG).show()
+                                scope.launch { snackbarHostState.showSnackbar(successSaveText) }
                             } else {
-                                Toast.makeText(context, saveErrorText, Toast.LENGTH_SHORT).show()
+                                scope.launch { snackbarHostState.showSnackbar(saveErrorText) }
                             }
                         }
                     }
@@ -432,11 +435,11 @@ fun TabEditorWorkspace(viewModel: EditorViewModel) {
                 onClick = {
                     if (hapticsEnabled) hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)
                     if (inputText.isBlank()) {
-                        Toast.makeText(context, errorText, Toast.LENGTH_SHORT).show()
+                        scope.launch { snackbarHostState.showSnackbar(errorText) }
                     } else {
                         viewModel.shareGeneratedImage { success ->
                             if (!success) {
-                                Toast.makeText(context, shareErrorText, Toast.LENGTH_SHORT).show()
+                                scope.launch { snackbarHostState.showSnackbar(shareErrorText) }
                             }
                         }
                     }

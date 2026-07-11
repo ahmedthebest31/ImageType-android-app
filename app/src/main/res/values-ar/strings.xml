@@ -106,6 +106,8 @@
     <string name="save_template_button">حفظ القالب</string>
     <string name="load_template_label">تحميل قالب</string>
     <string name="template_loaded">تم تحميل القالب "%1$s"</string>
+    <string name="delete_template_button">حذف</string>
+    <string name="template_deleted">تم حذف القالب</string>
     <string name="about_downloads_button">عن التطبيق والتنزيلات</string>
     <string name="share_app_button">مشاركة التطبيق</string>
     <string name="rate_app_button">تقييم التطبيق</string>

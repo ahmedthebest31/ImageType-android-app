@@ -2,7 +2,6 @@ package com.ahmedsamy.imagetype.ui.screens
 
 import android.content.Intent
 import android.net.Uri
-import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -17,6 +16,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Language
 import androidx.compose.material.icons.filled.Save
 import androidx.compose.material.icons.filled.Share
@@ -26,15 +26,18 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -49,12 +52,14 @@ import androidx.compose.ui.unit.dp
 import com.ahmedsamy.imagetype.EditorViewModel
 import com.ahmedsamy.imagetype.R
 import com.ahmedsamy.imagetype.ui.components.ImageTypeDropdown
+import kotlinx.coroutines.launch
 
 @Composable
-fun TabSettingsWorkspace(viewModel: EditorViewModel) {
+fun TabSettingsWorkspace(viewModel: EditorViewModel, snackbarHostState: SnackbarHostState) {
     val context = LocalContext.current
     val hapticFeedback = LocalHapticFeedback.current
     val scrollState = rememberScrollState()
+    val scope = rememberCoroutineScope()
 
     val appTheme by viewModel.appTheme.collectAsState()
     val appLanguage by viewModel.appLanguage.collectAsState()
@@ -62,10 +67,13 @@ fun TabSettingsWorkspace(viewModel: EditorViewModel) {
     val savedTemplates by viewModel.savedTemplates.collectAsState()
 
     var templateInputName by remember { mutableStateOf("") }
+    var selectedTemplate by remember { mutableStateOf<com.ahmedsamy.imagetype.util.Template?>(null) }
 
     val templateNameErrorText = stringRes(R.string.template_name_error)
     val shareAppTitleText = stringRes(R.string.share_app_title)
     val templateLoadedText = stringRes(R.string.template_loaded)
+    val deleteTemplateText = stringRes(R.string.delete_template_button)
+    val templateDeletedText = stringRes(R.string.template_deleted)
 
     Column(
         modifier = Modifier
@@ -162,10 +170,10 @@ fun TabSettingsWorkspace(viewModel: EditorViewModel) {
                         if (hapticsEnabled) hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)
                         if (templateInputName.isNotBlank()) {
                             viewModel.saveAsTemplate(templateInputName)
-                            Toast.makeText(context, successTemplateText, Toast.LENGTH_SHORT).show()
+                            scope.launch { snackbarHostState.showSnackbar(successTemplateText) }
                             templateInputName = ""
                         } else {
-                            Toast.makeText(context, templateNameErrorText, Toast.LENGTH_SHORT).show()
+                            scope.launch { snackbarHostState.showSnackbar(templateNameErrorText) }
                         }
                     },
                     modifier = Modifier.fillMaxWidth(),
@@ -178,18 +186,46 @@ fun TabSettingsWorkspace(viewModel: EditorViewModel) {
                 }
 
                 if (savedTemplates.isNotEmpty()) {
-                    ImageTypeDropdown(
-                        label = stringRes(R.string.load_template_label),
-                        options = savedTemplates,
-                        selectedOption = savedTemplates.first(),
-                        getLabel = { it.name },
-                        onOptionSelected = {
-                            viewModel.loadTemplate(it)
-                            Toast.makeText(context, String.format(templateLoadedText, it.name), Toast.LENGTH_SHORT).show()
-                        },
-                        hapticFeedback = hapticFeedback,
-                        hapticsEnabled = hapticsEnabled
-                    )
+                    if (selectedTemplate == null || savedTemplates.none { it.id == selectedTemplate!!.id }) {
+                        selectedTemplate = savedTemplates.first()
+                    }
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        ImageTypeDropdown(
+                            label = stringRes(R.string.load_template_label),
+                            options = savedTemplates,
+                            selectedOption = selectedTemplate ?: savedTemplates.first(),
+                            getLabel = { it.name },
+                            onOptionSelected = { template ->
+                                selectedTemplate = template
+                                viewModel.loadTemplate(template)
+                                scope.launch { snackbarHostState.showSnackbar(String.format(templateLoadedText, template.name)) }
+                            },
+                            hapticFeedback = hapticFeedback,
+                            hapticsEnabled = hapticsEnabled,
+                            modifier = Modifier.weight(1f)
+                        )
+                        IconButton(
+                            onClick = {
+                                if (hapticsEnabled) hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)
+                                selectedTemplate?.let { template ->
+                                    viewModel.deleteTemplate(template)
+                                    selectedTemplate = null
+                                    scope.launch { snackbarHostState.showSnackbar(templateDeletedText) }
+                                }
+                            }
+                        ) {
+                            Icon(
+                                Icons.Default.Delete,
+                                contentDescription = deleteTemplateText,
+                                tint = MaterialTheme.colorScheme.error
+                            )
+                        }
+                    }
+                } else {
+                    selectedTemplate = null
                 }
             }
         }

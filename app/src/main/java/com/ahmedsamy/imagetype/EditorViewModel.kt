@@ -186,11 +186,26 @@ class EditorViewModel(application: Application) : AndroidViewModel(application) 
         _textColor.value = template.textColor
         _textShadow.value = template.textShadow
         _dimensions.value = template.dimensions
-        _bgType.value = template.bgType
         _bgColor.value = template.bgColor
         _imageQuality.value = template.imageQuality
-        // Uri load isn't standard in persistence but we fall back nicely
+        if (template.bgType == "Existing Image") {
+            _bgType.value = "Solid Color"
+            _bgImageUri.value = null
+        } else {
+            _bgType.value = template.bgType
+            _bgImageUri.value = null
+        }
         generateImage()
+    }
+
+    fun deleteTemplate(template: Template) {
+        val currentList = _savedTemplates.value.toMutableList()
+        currentList.removeAll { it.id == template.id }
+        _savedTemplates.value = currentList
+        viewModelScope.launch {
+            val json = templateSerializer.toJson(currentList)
+            preferencesManager.saveTemplates(json)
+        }
     }
 
     // --- Image Generation (delegates to ImageGenerator) ---
