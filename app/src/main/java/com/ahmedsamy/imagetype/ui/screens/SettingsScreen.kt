@@ -52,6 +52,7 @@ import androidx.compose.ui.unit.dp
 import com.ahmedsamy.imagetype.EditorViewModel
 import com.ahmedsamy.imagetype.R
 import com.ahmedsamy.imagetype.ui.components.ImageTypeDropdown
+import com.ahmedsamy.imagetype.util.AppTheme
 import kotlinx.coroutines.launch
 
 @Composable
@@ -91,11 +92,11 @@ fun TabSettingsWorkspace(viewModel: EditorViewModel, snackbarHostState: Snackbar
                 modifier = Modifier.padding(16.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                val themes = listOf("Dark Mode", "Light Mode", "System Default")
                 ImageTypeDropdown(
                     label = stringRes(R.string.theme_label),
-                    options = themes,
+                    options = AppTheme.entries.toList(),
                     selectedOption = appTheme,
+                    getLabel = { it.value },
                     onOptionSelected = { viewModel.updateTheme(it) },
                     hapticFeedback = hapticFeedback,
                     hapticsEnabled = hapticsEnabled
@@ -105,8 +106,8 @@ fun TabSettingsWorkspace(viewModel: EditorViewModel, snackbarHostState: Snackbar
 
                 val languages = listOf("en", "ar", "fr", "it", "tr", "de", "es")
                 val languageDisplayNames = mapOf(
-                    "en" to "English", "ar" to "العربية", "fr" to "Français",
-                    "it" to "Italiano", "tr" to "Türkçe", "de" to "Deutsch", "es" to "Español"
+                    "en" to "English", "ar" to "\u0627\u0644\u0639\u0631\u0628\u064a\u0629", "fr" to "Fran\u00e7ais",
+                    "it" to "Italiano", "tr" to "T\u00fcrk\u00e7e", "de" to "Deutsch", "es" to "Espa\u00f1ol"
                 )
 
                 ImageTypeDropdown(

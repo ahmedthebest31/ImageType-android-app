@@ -48,19 +48,23 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.hapticfeedback.HapticFeedback
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.testTag
 import com.ahmedsamy.imagetype.util.stringRes
 import androidx.compose.ui.semantics.*
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.ahmedsamy.imagetype.EditorViewModel
 import com.ahmedsamy.imagetype.FontManager
 import com.ahmedsamy.imagetype.R
 import com.ahmedsamy.imagetype.ui.components.ImageTypeDropdown
+import com.ahmedsamy.imagetype.util.BgType
+import com.ahmedsamy.imagetype.util.FontStyle
+import com.ahmedsamy.imagetype.util.ImageDimensions
+import com.ahmedsamy.imagetype.util.ImageQuality
+import com.ahmedsamy.imagetype.util.TextColor
+import com.ahmedsamy.imagetype.util.TextPosition
 import kotlinx.coroutines.launch
 
 @Composable
@@ -91,8 +95,6 @@ fun TabEditorWorkspace(viewModel: EditorViewModel, snackbarHostState: SnackbarHo
     val saveErrorText = stringRes(R.string.save_error)
     val shareErrorText = stringRes(R.string.share_error)
     val fontSizeSliderText = stringRes(R.string.font_size_slider)
-    val fitTextSemText = stringRes(R.string.fit_text_checkbox)
-    val shadowSemText = stringRes(R.string.enable_shadow_label)
 
     val photoPickerLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.PickVisualMedia(),
@@ -222,15 +224,11 @@ fun TabEditorWorkspace(viewModel: EditorViewModel, snackbarHostState: SnackbarHo
                             )
                         }
 
-                        val positionOptions = listOf(
-                            "Top Left", "Top Center", "Top Right",
-                            "Middle Left", "Center", "Middle Right",
-                            "Bottom Left", "Bottom Center", "Bottom Right"
-                        )
                         ImageTypeDropdown(
                             label = stringRes(R.string.text_position_label),
-                            options = positionOptions,
+                            options = TextPosition.entries.toList(),
                             selectedOption = textPosition,
+                            getLabel = { it.value },
                             onOptionSelected = { viewModel.setTextPosition(it) },
                             hapticFeedback = hapticFeedback,
                             hapticsEnabled = hapticsEnabled
@@ -248,25 +246,21 @@ fun TabEditorWorkspace(viewModel: EditorViewModel, snackbarHostState: SnackbarHo
                     hapticsEnabled = hapticsEnabled
                 )
 
-                val fontStyles = listOf("Regular", "Bold", "Italic", "Bold-Italic")
                 ImageTypeDropdown(
                     label = stringRes(R.string.font_style_label),
-                    options = fontStyles,
+                    options = FontStyle.entries.toList(),
                     selectedOption = fontStyle,
+                    getLabel = { it.value },
                     onOptionSelected = { viewModel.setFontStyle(it) },
                     hapticFeedback = hapticFeedback,
                     hapticsEnabled = hapticsEnabled
                 )
 
-                val colorsList = listOf(
-                    "White", "Black", "Red", "Blue", "Green", "Islamic Green", "Yellow",
-                    "Orange", "Pink", "Purple", "Gray", "Cyan", "Magenta",
-                    "Light Blue", "Light Green"
-                )
                 ImageTypeDropdown(
                     label = stringRes(R.string.text_color_label),
-                    options = colorsList,
+                    options = TextColor.entries.toList(),
                     selectedOption = textColor,
+                    getLabel = { it.value },
                     onOptionSelected = { viewModel.setTextColor(it) },
                     hapticFeedback = hapticFeedback,
                     hapticsEnabled = hapticsEnabled
@@ -307,44 +301,36 @@ fun TabEditorWorkspace(viewModel: EditorViewModel, snackbarHostState: SnackbarHo
                 modifier = Modifier.padding(16.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                val dimensionsList = listOf(
-                    "Standard (1920x1080)", "Standard HD (1280x720)", "Square (1080x1080)",
-                    "Portrait/Reels (1080x1920)", "4:3 (1024x768)", "3:4 (768x1024)",
-                    "Ultrawide (2560x1080)", "Twitter Header (1500x500)"
-                )
                 ImageTypeDropdown(
                     label = stringRes(R.string.dimensions_label),
-                    options = dimensionsList,
+                    options = ImageDimensions.entries.toList(),
                     selectedOption = dimensions,
+                    getLabel = { it.value },
                     onOptionSelected = { viewModel.setDimensions(it) },
                     hapticFeedback = hapticFeedback,
                     hapticsEnabled = hapticsEnabled
                 )
 
-                val bgTypes = listOf("Solid Color", "Transparent", "Existing Image")
                 ImageTypeDropdown(
                     label = stringRes(R.string.bg_type_label),
-                    options = bgTypes,
+                    options = BgType.entries.toList(),
                     selectedOption = bgType,
+                    getLabel = { it.value },
                     onOptionSelected = { viewModel.setBgType(it) },
                     hapticFeedback = hapticFeedback,
                     hapticsEnabled = hapticsEnabled
                 )
 
                 AnimatedVisibility(
-                    visible = bgType == "Solid Color",
+                    visible = bgType == BgType.SolidColor,
                     enter = expandVertically() + fadeIn(),
                     exit = shrinkVertically() + fadeOut()
                 ) {
-                    val bgColorsList = listOf(
-                        "White", "Black", "Red", "Blue", "Green", "Islamic Green",
-                        "Yellow", "Orange", "Pink", "Purple", "Gray", "Cyan",
-                        "Magenta", "Light Blue", "Light Green"
-                    )
                     ImageTypeDropdown(
                         label = stringRes(R.string.bg_color_label),
-                        options = bgColorsList,
+                        options = TextColor.entries.toList(),
                         selectedOption = bgColor,
+                        getLabel = { it.value },
                         onOptionSelected = { viewModel.setBgColor(it) },
                         hapticFeedback = hapticFeedback,
                         hapticsEnabled = hapticsEnabled
@@ -352,7 +338,7 @@ fun TabEditorWorkspace(viewModel: EditorViewModel, snackbarHostState: SnackbarHo
                 }
 
                 AnimatedVisibility(
-                    visible = bgType == "Existing Image",
+                    visible = bgType == BgType.ExistingImage,
                     enter = expandVertically() + fadeIn(),
                     exit = shrinkVertically() + fadeOut()
                 ) {
@@ -383,11 +369,11 @@ fun TabEditorWorkspace(viewModel: EditorViewModel, snackbarHostState: SnackbarHo
                     }
                 }
 
-                val qualities = listOf("100% (High)", "80% (Medium)", "60% (Low)")
                 ImageTypeDropdown(
                     label = stringRes(R.string.image_quality_label),
-                    options = qualities,
+                    options = ImageQuality.entries.toList(),
                     selectedOption = imageQuality,
+                    getLabel = { it.value },
                     onOptionSelected = { viewModel.setImageQuality(it) },
                     hapticFeedback = hapticFeedback,
                     hapticsEnabled = hapticsEnabled

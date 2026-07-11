@@ -6,7 +6,7 @@ import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.ahmedsamy.imagetype.util.Template
+import com.ahmedsamy.imagetype.util.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -28,38 +28,38 @@ class EditorViewModel(application: Application) : AndroidViewModel(application) 
     private val _fitText = MutableStateFlow(true)
     val fitText: StateFlow<Boolean> = _fitText.asStateFlow()
 
-    private val _fontSize = MutableStateFlow(60f) // range 10f to 200f
+    private val _fontSize = MutableStateFlow(60f)
     val fontSize: StateFlow<Float> = _fontSize.asStateFlow()
 
-    private val _textPosition = MutableStateFlow("Center")
-    val textPosition: StateFlow<String> = _textPosition.asStateFlow()
+    private val _textPosition = MutableStateFlow(TextPosition.Center)
+    val textPosition: StateFlow<TextPosition> = _textPosition.asStateFlow()
 
     private val _fontFamily = MutableStateFlow("Amiri")
     val fontFamily: StateFlow<String> = _fontFamily.asStateFlow()
 
-    private val _fontStyle = MutableStateFlow("Regular")
-    val fontStyle: StateFlow<String> = _fontStyle.asStateFlow()
+    private val _fontStyle = MutableStateFlow(FontStyle.Regular)
+    val fontStyle: StateFlow<FontStyle> = _fontStyle.asStateFlow()
 
-    private val _textColor = MutableStateFlow("White")
-    val textColor: StateFlow<String> = _textColor.asStateFlow()
+    private val _textColor = MutableStateFlow(TextColor.White)
+    val textColor: StateFlow<TextColor> = _textColor.asStateFlow()
 
     private val _textShadow = MutableStateFlow(true)
     val textShadow: StateFlow<Boolean> = _textShadow.asStateFlow()
 
-    private val _dimensions = MutableStateFlow("Square (1080x1080)")
-    val dimensions: StateFlow<String> = _dimensions.asStateFlow()
+    private val _dimensions = MutableStateFlow(ImageDimensions.Square)
+    val dimensions: StateFlow<ImageDimensions> = _dimensions.asStateFlow()
 
-    private val _bgType = MutableStateFlow("Solid Color")
-    val bgType: StateFlow<String> = _bgType.asStateFlow()
+    private val _bgType = MutableStateFlow(BgType.SolidColor)
+    val bgType: StateFlow<BgType> = _bgType.asStateFlow()
 
-    private val _bgColor = MutableStateFlow("Black")
-    val bgColor: StateFlow<String> = _bgColor.asStateFlow()
+    private val _bgColor = MutableStateFlow(TextColor.Black)
+    val bgColor: StateFlow<TextColor> = _bgColor.asStateFlow()
 
     private val _bgImageUri = MutableStateFlow<Uri?>(null)
     val bgImageUri: StateFlow<Uri?> = _bgImageUri.asStateFlow()
 
-    private val _imageQuality = MutableStateFlow("100% (High)")
-    val imageQuality: StateFlow<String> = _imageQuality.asStateFlow()
+    private val _imageQuality = MutableStateFlow(ImageQuality.High)
+    val imageQuality: StateFlow<ImageQuality> = _imageQuality.asStateFlow()
 
     // --- Tab 2 Live Preview Output States ---
     private val _generatedBitmap = MutableStateFlow<Bitmap?>(null)
@@ -69,8 +69,8 @@ class EditorViewModel(application: Application) : AndroidViewModel(application) 
     val isRendering: StateFlow<Boolean> = _isRendering.asStateFlow()
 
     // --- Tab 3 Settings & Metadata States ---
-    private val _appTheme = MutableStateFlow("System Default")
-    val appTheme: StateFlow<String> = _appTheme.asStateFlow()
+    private val _appTheme = MutableStateFlow(AppTheme.System)
+    val appTheme: StateFlow<AppTheme> = _appTheme.asStateFlow()
 
     private val _appLanguage = MutableStateFlow("en")
     val appLanguage: StateFlow<String> = _appLanguage.asStateFlow()
@@ -82,9 +82,8 @@ class EditorViewModel(application: Application) : AndroidViewModel(application) 
     val savedTemplates: StateFlow<List<Template>> = _savedTemplates.asStateFlow()
 
     init {
-        // Load data from DataStore Preferences on Init
         viewModelScope.launch {
-            preferencesManager.themeFlow.collect { _appTheme.value = it }
+            preferencesManager.themeFlow.collect { _appTheme.value = AppTheme.fromValue(it) }
         }
         viewModelScope.launch {
             preferencesManager.languageFlow.collect { _appLanguage.value = it }
@@ -102,14 +101,13 @@ class EditorViewModel(application: Application) : AndroidViewModel(application) 
             }
         }
 
-        // Combine inputs to generate the preview dynamically and instantly
         viewModelScope.launch {
             combine(
                 _inputText, _fitText, _fontSize, _textPosition, _fontFamily,
                 _fontStyle, _textColor, _textShadow, _dimensions, _bgType,
                 _bgColor, _bgImageUri
             ) { args -> args }
-                .debounce(100) // prevent overwhelming the thread during sliders/typing
+                .debounce(100)
                 .collect {
                     generateImage()
                 }
@@ -120,21 +118,21 @@ class EditorViewModel(application: Application) : AndroidViewModel(application) 
     fun setInputText(text: String) { _inputText.value = text }
     fun setFitText(fit: Boolean) { _fitText.value = fit }
     fun setFontSize(size: Float) { _fontSize.value = size }
-    fun setTextPosition(position: String) { _textPosition.value = position }
+    fun setTextPosition(position: TextPosition) { _textPosition.value = position }
     fun setFontFamily(family: String) { _fontFamily.value = family }
-    fun setFontStyle(style: String) { _fontStyle.value = style }
-    fun setTextColor(color: String) { _textColor.value = color }
+    fun setFontStyle(style: FontStyle) { _fontStyle.value = style }
+    fun setTextColor(color: TextColor) { _textColor.value = color }
     fun setTextShadow(shadow: Boolean) { _textShadow.value = shadow }
-    fun setDimensions(dim: String) { _dimensions.value = dim }
-    fun setBgType(type: String) { _bgType.value = type }
-    fun setBgColor(color: String) { _bgColor.value = color }
+    fun setDimensions(dim: ImageDimensions) { _dimensions.value = dim }
+    fun setBgType(type: BgType) { _bgType.value = type }
+    fun setBgColor(color: TextColor) { _bgColor.value = color }
     fun setBgImageUri(uri: Uri?) { _bgImageUri.value = uri }
-    fun setImageQuality(quality: String) { _imageQuality.value = quality }
+    fun setImageQuality(quality: ImageQuality) { _imageQuality.value = quality }
 
     // --- Preferences modifications ---
-    fun updateTheme(theme: String) {
+    fun updateTheme(theme: AppTheme) {
         _appTheme.value = theme
-        viewModelScope.launch { preferencesManager.saveTheme(theme) }
+        viewModelScope.launch { preferencesManager.saveTheme(theme.value) }
     }
 
     fun updateLanguage(lang: String) {
@@ -157,15 +155,15 @@ class EditorViewModel(application: Application) : AndroidViewModel(application) 
             text = _inputText.value,
             fitText = _fitText.value,
             fontSize = _fontSize.value,
-            textPosition = _textPosition.value,
+            textPosition = _textPosition.value.value,
             fontFamily = _fontFamily.value,
-            fontStyle = _fontStyle.value,
-            textColor = _textColor.value,
+            fontStyle = _fontStyle.value.value,
+            textColor = _textColor.value.value,
             textShadow = _textShadow.value,
-            dimensions = _dimensions.value,
-            bgType = _bgType.value,
-            bgColor = _bgColor.value,
-            imageQuality = _imageQuality.value
+            dimensions = _dimensions.value.value,
+            bgType = _bgType.value.value,
+            bgColor = _bgColor.value.value,
+            imageQuality = _imageQuality.value.value
         )
         currentList.removeAll { it.name.trim().lowercase() == name.trim().lowercase() }
         currentList.add(template)
@@ -180,19 +178,19 @@ class EditorViewModel(application: Application) : AndroidViewModel(application) 
         _inputText.value = template.text
         _fitText.value = template.fitText
         _fontSize.value = template.fontSize
-        _textPosition.value = template.textPosition
+        _textPosition.value = TextPosition.fromValue(template.textPosition)
         _fontFamily.value = template.fontFamily
-        _fontStyle.value = template.fontStyle
-        _textColor.value = template.textColor
+        _fontStyle.value = FontStyle.fromValue(template.fontStyle)
+        _textColor.value = TextColor.fromValue(template.textColor)
         _textShadow.value = template.textShadow
-        _dimensions.value = template.dimensions
-        _bgColor.value = template.bgColor
-        _imageQuality.value = template.imageQuality
-        if (template.bgType == "Existing Image") {
-            _bgType.value = "Solid Color"
+        _dimensions.value = ImageDimensions.fromValue(template.dimensions)
+        _bgColor.value = TextColor.fromValue(template.bgColor)
+        _imageQuality.value = ImageQuality.fromValue(template.imageQuality)
+        if (BgType.fromValue(template.bgType) == BgType.ExistingImage) {
+            _bgType.value = BgType.SolidColor
             _bgImageUri.value = null
         } else {
-            _bgType.value = template.bgType
+            _bgType.value = BgType.fromValue(template.bgType)
             _bgImageUri.value = null
         }
         generateImage()
@@ -243,7 +241,7 @@ class EditorViewModel(application: Application) : AndroidViewModel(application) 
             onFinished(false)
             return
         }
-        imageStorageManager.saveToGallery(bitmap, _imageQuality.value, _bgType.value, viewModelScope, onFinished)
+        imageStorageManager.saveToGallery(bitmap, _imageQuality.value.qualityInt, _bgType.value, viewModelScope, onFinished)
     }
 
     // --- Share Image (delegates to ImageStorageManager) ---
@@ -253,6 +251,6 @@ class EditorViewModel(application: Application) : AndroidViewModel(application) 
             onFinished(false)
             return
         }
-        imageStorageManager.shareImage(bitmap, _imageQuality.value, _bgType.value, viewModelScope, onFinished)
+        imageStorageManager.shareImage(bitmap, _imageQuality.value.qualityInt, _bgType.value, viewModelScope, onFinished)
     }
 }

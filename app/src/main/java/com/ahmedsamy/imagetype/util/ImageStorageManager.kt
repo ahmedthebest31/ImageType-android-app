@@ -22,18 +22,17 @@ class ImageStorageManager(private val context: Context) {
 
     fun saveToGallery(
         bitmap: Bitmap,
-        imageQuality: String,
-        bgType: String,
+        quality: Int,
+        bgType: BgType,
         scope: CoroutineScope,
         onFinished: (Boolean) -> Unit
     ) {
         scope.launch(Dispatchers.IO) {
             var success = false
             try {
-                val quality = ImageGenerator.getExportQualityInt(imageQuality)
-                val format = if (bgType == "Transparent") Bitmap.CompressFormat.PNG else Bitmap.CompressFormat.JPEG
-                val extension = if (bgType == "Transparent") "png" else "jpg"
-                val mimeType = if (bgType == "Transparent") "image/png" else "image/jpeg"
+                val format = if (bgType == BgType.Transparent) Bitmap.CompressFormat.PNG else Bitmap.CompressFormat.JPEG
+                val extension = if (bgType == BgType.Transparent) "png" else "jpg"
+                val mimeType = if (bgType == BgType.Transparent) "image/png" else "image/jpeg"
                 val filename = "ImageType_${System.currentTimeMillis()}.$extension"
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
@@ -58,6 +57,7 @@ class ImageStorageManager(private val context: Context) {
                     FileOutputStream(file).use { outStream ->
                         success = bitmap.compress(format, quality, outStream)
                     }
+                    @Suppress("DEPRECATION")
                     val mediaScanIntent = Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE)
                     mediaScanIntent.data = Uri.fromFile(file)
                     context.sendBroadcast(mediaScanIntent)
@@ -71,16 +71,15 @@ class ImageStorageManager(private val context: Context) {
 
     fun shareImage(
         bitmap: Bitmap,
-        imageQuality: String,
-        bgType: String,
+        quality: Int,
+        bgType: BgType,
         scope: CoroutineScope,
         onFinished: (Boolean) -> Unit
     ) {
         scope.launch(Dispatchers.IO) {
             try {
-                val quality = ImageGenerator.getExportQualityInt(imageQuality)
-                val format = if (bgType == "Transparent") Bitmap.CompressFormat.PNG else Bitmap.CompressFormat.JPEG
-                val extension = if (bgType == "Transparent") "png" else "jpg"
+                val format = if (bgType == BgType.Transparent) Bitmap.CompressFormat.PNG else Bitmap.CompressFormat.JPEG
+                val extension = if (bgType == BgType.Transparent) "png" else "jpg"
 
                 val cachePath = File(context.cacheDir, "shared_images")
                 cachePath.mkdirs()

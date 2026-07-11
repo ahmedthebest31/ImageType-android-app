@@ -37,6 +37,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import com.ahmedsamy.imagetype.util.AppTheme
 import com.ahmedsamy.imagetype.util.LocalAppLanguage
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.hapticfeedback.HapticFeedback
@@ -72,9 +73,9 @@ class MainActivity : ComponentActivity() {
 
             val themeState by viewModel.appTheme.collectAsState()
             val forceDark = when (themeState) {
-                "Dark Mode" -> true
-                "Light Mode" -> false
-                else -> isSystemInDarkTheme()
+                AppTheme.Dark -> true
+                AppTheme.Light -> false
+                AppTheme.System -> isSystemInDarkTheme()
             }
 
             val appLanguage by viewModel.appLanguage.collectAsState()

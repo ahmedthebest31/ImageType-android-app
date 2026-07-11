@@ -8,7 +8,6 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.PorterDuff
 import android.graphics.RectF
-import android.graphics.Typeface
 import android.net.Uri
 import android.text.Layout
 import android.text.StaticLayout
@@ -26,20 +25,19 @@ class ImageGenerator(private val context: Context) {
         inputText: String,
         fitText: Boolean,
         fontSize: Float,
-        textPosition: String,
+        textPosition: TextPosition,
         fontFamily: String,
-        fontStyle: String,
-        textColor: String,
+        fontStyle: FontStyle,
+        textColor: TextColor,
         textShadow: Boolean,
-        dimensions: String,
-        bgType: String,
-        bgColor: String,
+        dimensions: ImageDimensions,
+        bgType: BgType,
+        bgColor: TextColor,
         bgImageUri: Uri?
     ): Bitmap? {
         return try {
-            val size = parseDimensions(dimensions)
-            val width = size.first
-            val height = size.second
+            val width = dimensions.width
+            val height = dimensions.height
 
             val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
             val canvas = Canvas(bitmap)
@@ -48,13 +46,7 @@ class ImageGenerator(private val context: Context) {
 
             val textPaint = TextPaint(Paint.ANTI_ALIAS_FLAG)
             val isArabic = FontManager.containsArabic(inputText)
-            val paintStyle = when (fontStyle) {
-                "Bold" -> Typeface.BOLD
-                "Italic" -> Typeface.ITALIC
-                "Bold-Italic" -> Typeface.BOLD_ITALIC
-                else -> Typeface.NORMAL
-            }
-            val typeface = FontManager.getTypeface(context, fontFamily, paintStyle, isArabic)
+            val typeface = FontManager.getTypeface(context, fontFamily, fontStyle.androidTypefaceStyle, isArabic)
             textPaint.typeface = typeface
 
             val paddingX = width * 0.08f
@@ -93,12 +85,11 @@ class ImageGenerator(private val context: Context) {
             val tx = translationXY.first
             val ty = translationXY.second
 
-            // Stroke outline (for WCAG high contrast legibility)
             if (textShadow) {
                 textPaint.style = Paint.Style.STROKE
                 textPaint.strokeWidth = finalFontSize * 0.08f
                 textPaint.strokeJoin = Paint.Join.ROUND
-                textPaint.color = if (isColorLight(textColor)) Color.BLACK else Color.WHITE
+                textPaint.color = if (textColor.isLight) Color.BLACK else Color.WHITE
 
                 canvas.save()
                 canvas.translate(tx, ty)
@@ -106,12 +97,11 @@ class ImageGenerator(private val context: Context) {
                 canvas.restore()
             }
 
-            // Render filled text
             textPaint.style = Paint.Style.FILL
             textPaint.strokeWidth = 0f
-            textPaint.color = getHexColor(textColor)
+            textPaint.color = textColor.hexColor
             if (textShadow) {
-                val shadowColor = if (isColorLight(textColor)) 0x80000000.toInt() else 0x80FFFFFF.toInt()
+                val shadowColor = if (textColor.isLight) 0x80000000.toInt() else 0x80FFFFFF.toInt()
                 textPaint.setShadowLayer(8f, 3f, 3f, shadowColor)
             } else {
                 textPaint.clearShadowLayer()
@@ -166,7 +156,7 @@ class ImageGenerator(private val context: Context) {
     }
 
     private fun calculateTranslation(
-        pos: String,
+        pos: TextPosition,
         canvasW: Float,
         canvasH: Float,
         layoutW: Float,
@@ -177,43 +167,42 @@ class ImageGenerator(private val context: Context) {
         val x: Float
         val y: Float
         when (pos) {
-            "Top Left" -> { x = padX; y = padY }
-            "Top Center" -> { x = (canvasW - layoutW) / 2f; y = padY }
-            "Top Right" -> { x = canvasW - layoutW - padX; y = padY }
-            "Middle Left" -> { x = padX; y = (canvasH - layoutH) / 2f }
-            "Center" -> { x = (canvasW - layoutW) / 2f; y = (canvasH - layoutH) / 2f }
-            "Middle Right" -> { x = canvasW - layoutW - padX; y = (canvasH - layoutH) / 2f }
-            "Bottom Left" -> { x = padX; y = canvasH - layoutH - padY }
-            "Bottom Center" -> { x = (canvasW - layoutW) / 2f; y = canvasH - layoutH - padY }
-            "Bottom Right" -> { x = canvasW - layoutW - padX; y = canvasH - layoutH - padY }
-            else -> { x = (canvasW - layoutW) / 2f; y = (canvasH - layoutH) / 2f }
+            TextPosition.TopLeft -> { x = padX; y = padY }
+            TextPosition.TopCenter -> { x = (canvasW - layoutW) / 2f; y = padY }
+            TextPosition.TopRight -> { x = canvasW - layoutW - padX; y = padY }
+            TextPosition.MiddleLeft -> { x = padX; y = (canvasH - layoutH) / 2f }
+            TextPosition.Center -> { x = (canvasW - layoutW) / 2f; y = (canvasH - layoutH) / 2f }
+            TextPosition.MiddleRight -> { x = canvasW - layoutW - padX; y = (canvasH - layoutH) / 2f }
+            TextPosition.BottomLeft -> { x = padX; y = canvasH - layoutH - padY }
+            TextPosition.BottomCenter -> { x = (canvasW - layoutW) / 2f; y = canvasH - layoutH - padY }
+            TextPosition.BottomRight -> { x = canvasW - layoutW - padX; y = canvasH - layoutH - padY }
         }
         return Pair(x.coerceAtLeast(0f), y.coerceAtLeast(0f))
     }
 
-    private fun getLayoutAlignment(pos: String, isArabic: Boolean): Layout.Alignment {
+    private fun getLayoutAlignment(pos: TextPosition, isArabic: Boolean): Layout.Alignment {
         return when {
-            pos.contains("Left") -> {
+            pos.value.contains("Left") -> {
                 if (isArabic) Layout.Alignment.ALIGN_OPPOSITE else Layout.Alignment.ALIGN_NORMAL
             }
-            pos.contains("Right") -> {
+            pos.value.contains("Right") -> {
                 if (isArabic) Layout.Alignment.ALIGN_NORMAL else Layout.Alignment.ALIGN_OPPOSITE
             }
             else -> Layout.Alignment.ALIGN_CENTER
         }
     }
 
-    private fun drawBackground(canvas: Canvas, w: Int, h: Int, bgType: String, bgColor: String, bgImageUri: Uri?) {
+    private fun drawBackground(canvas: Canvas, w: Int, h: Int, bgType: BgType, bgColor: TextColor, bgImageUri: Uri?) {
         val paint = Paint().apply { style = Paint.Style.FILL }
         when (bgType) {
-            "Solid Color" -> {
-                paint.color = getHexColor(bgColor)
+            BgType.SolidColor -> {
+                paint.color = bgColor.hexColor
                 canvas.drawRect(0f, 0f, w.toFloat(), h.toFloat(), paint)
             }
-            "Transparent" -> {
+            BgType.Transparent -> {
                 canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR)
             }
-            "Existing Image" -> {
+            BgType.ExistingImage -> {
                 val uri = bgImageUri
                 if (uri == null) {
                     cachedBgUri = null
@@ -292,55 +281,5 @@ class ImageGenerator(private val context: Context) {
         val paint = Paint(Paint.FILTER_BITMAP_FLAG)
         canvas.drawBitmap(source, null, targetRect, paint)
         return destBitmap
-    }
-
-    fun parseDimensions(dim: String): Pair<Int, Int> {
-        return when {
-            dim.contains("1920x1080") -> Pair(1920, 1080)
-            dim.contains("1280x720") -> Pair(1280, 720)
-            dim.contains("1080x1080") -> Pair(1080, 1080)
-            dim.contains("1080x1920") -> Pair(1080, 1920)
-            dim.contains("1024x768") -> Pair(1024, 768)
-            dim.contains("768x1024") -> Pair(768, 1024)
-            dim.contains("2560x1080") -> Pair(2560, 1080)
-            dim.contains("1500x500") -> Pair(1500, 500)
-            else -> Pair(1080, 1080)
-        }
-    }
-
-    fun getHexColor(colorName: String): Int {
-        return when (colorName) {
-            "White" -> Color.WHITE
-            "Black" -> Color.BLACK
-            "Red" -> 0xFFE53935.toInt()
-            "Blue" -> 0xFF1E88E5.toInt()
-            "Green" -> 0xFF4CAF50.toInt()
-            "Yellow" -> 0xFFFFEB3B.toInt()
-            "Orange" -> 0xFFFB8C00.toInt()
-            "Pink" -> 0xFFE91E63.toInt()
-            "Purple" -> 0xFF8E24AA.toInt()
-            "Gray" -> 0xFF757575.toInt()
-            "Cyan" -> 0xFF00ACC1.toInt()
-            "Magenta" -> 0xFFD81B60.toInt()
-            "Light Blue" -> 0xFF90CAF9.toInt()
-            "Light Green" -> 0xFFA5D6A7.toInt()
-            "Islamic Green" -> 0xFF009933.toInt()
-            else -> Color.WHITE
-        }
-    }
-
-    fun isColorLight(colorName: String): Boolean {
-        return colorName in listOf("White", "Yellow", "Pink", "Cyan", "Light Blue", "Light Green", "Islamic Green")
-    }
-
-    companion object {
-        fun getExportQualityInt(qualityStr: String): Int {
-            return when {
-                qualityStr.contains("High") -> 100
-                qualityStr.contains("Medium") -> 80
-                qualityStr.contains("Low") -> 60
-                else -> 100
-            }
-        }
     }
 }

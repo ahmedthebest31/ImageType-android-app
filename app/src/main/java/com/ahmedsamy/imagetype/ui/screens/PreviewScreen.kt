@@ -45,6 +45,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.ahmedsamy.imagetype.EditorViewModel
 import com.ahmedsamy.imagetype.R
+import com.ahmedsamy.imagetype.util.BgType
 import com.ahmedsamy.imagetype.util.checkerboardBackground
 
 @Composable
@@ -80,7 +81,7 @@ fun TabLivePreviewWorkspace(viewModel: EditorViewModel) {
                     .clip(RectangleShape)
                     .border(1.dp, MaterialTheme.colorScheme.outline, RectangleShape)
                     .then(
-                        if (bgType == "Transparent") Modifier.checkerboardBackground() else Modifier.background(
+                        if (bgType == BgType.Transparent) Modifier.checkerboardBackground() else Modifier.background(
                             Color.DarkGray
                         )
                     )
