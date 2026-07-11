@@ -100,7 +100,8 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainScreen(viewModel: EditorViewModel) {
     val currentLang by viewModel.appLanguage.collectAsState()
-    val isRtl = currentLang in setOf("ar", "fa", "he", "ur", "ps", "sd", "yi")
+    val resolvedLang = com.ahmedsamy.imagetype.util.resolveLanguage(currentLang)
+    val isRtl = resolvedLang in setOf("ar", "fa", "he", "ur", "ps", "sd", "yi")
 
     CompositionLocalProvider(
         androidx.compose.ui.platform.LocalLayoutDirection provides if (isRtl) {

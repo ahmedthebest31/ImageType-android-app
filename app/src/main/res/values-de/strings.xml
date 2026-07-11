@@ -59,6 +59,7 @@
     <string name="theme_dark">Dunkelmodus</string>
     <string name="theme_light">Hellmodus</string>
     <string name="theme_system">Systemstandard</string>
+    <string name="language_system_default">Systemstandard</string>
 
     <!-- Navigation Tabs -->
     <string name="tab_editor">Editor</string>

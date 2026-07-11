@@ -153,6 +153,7 @@ fun getDropdownItemStringResId(option: String): Int {
         "Dark Mode" -> R.string.theme_dark
         "Light Mode" -> R.string.theme_light
         "System Default" -> R.string.theme_system
+        "System" -> R.string.language_system_default
         else -> 0
     }
 }

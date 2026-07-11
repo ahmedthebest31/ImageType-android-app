@@ -59,6 +59,7 @@
     <string name="theme_dark">الوضع الداكن</string>
     <string name="theme_light">الوضع الفاتح</string>
     <string name="theme_system">افتراضي النظام</string>
+    <string name="language_system_default">افتراضي النظام</string>
 
     <!-- Navigation Tabs -->
     <string name="tab_editor">المحرر</string>

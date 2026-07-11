@@ -7,12 +7,20 @@ import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.platform.LocalContext
 import java.util.Locale
 
-val LocalAppLanguage = staticCompositionLocalOf { "en" }
+val LocalAppLanguage = staticCompositionLocalOf { "system" }
+
+fun resolveLanguage(lang: String): String {
+    return if (lang == "system") {
+        Locale.getDefault().toLanguageTag().substringBefore('-')
+    } else {
+        lang
+    }
+}
 
 @Composable
 fun stringRes(id: Int, vararg formatArgs: Any): String {
     val context = LocalContext.current
-    val lang = LocalAppLanguage.current
+    val lang = resolveLanguage(LocalAppLanguage.current)
     val locale = Locale.forLanguageTag(lang)
     val localizedContext = remember(context, lang) {
         val config = Configuration(context.resources.configuration).apply {

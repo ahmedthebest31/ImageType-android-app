@@ -22,7 +22,7 @@ class PreferencesManager(private val context: Context) {
     }
 
     val languageFlow: Flow<String> = context.dataStore.data.map { preferences ->
-        preferences[KEY_LANGUAGE] ?: "en"
+        preferences[KEY_LANGUAGE] ?: "system"
     }
 
     val hapticsFlow: Flow<Boolean> = context.dataStore.data.map { preferences ->

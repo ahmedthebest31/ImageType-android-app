@@ -104,8 +104,9 @@ fun TabSettingsWorkspace(viewModel: EditorViewModel, snackbarHostState: Snackbar
 
                 Spacer(modifier = Modifier.height(4.dp))
 
-                val languages = listOf("en", "ar", "fr", "it", "tr", "de", "es")
+                val languages = listOf("system", "en", "ar", "fr", "it", "tr", "de", "es")
                 val languageDisplayNames = mapOf(
+                    "system" to stringRes(R.string.language_system_default),
                     "en" to "English", "ar" to "\u0627\u0644\u0639\u0631\u0628\u064a\u0629", "fr" to "Fran\u00e7ais",
                     "it" to "Italiano", "tr" to "T\u00fcrk\u00e7e", "de" to "Deutsch", "es" to "Espa\u00f1ol"
                 )

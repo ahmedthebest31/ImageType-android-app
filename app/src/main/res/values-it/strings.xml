@@ -59,6 +59,7 @@
     <string name="theme_dark">Modalità scura</string>
     <string name="theme_light">Modalità chiara</string>
     <string name="theme_system">Predefinito di sistema</string>
+    <string name="language_system_default">Predefinito di sistema</string>
 
     <!-- Navigation Tabs -->
     <string name="tab_editor">Editor</string>

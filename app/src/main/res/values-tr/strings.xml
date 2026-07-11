@@ -59,6 +59,7 @@
     <string name="theme_dark">Karanlık Mod</string>
     <string name="theme_light">Aydınlık Mod</string>
     <string name="theme_system">Sistem Varsayılanı</string>
+    <string name="language_system_default">Sistem Varsayılanı</string>
 
     <!-- Navigation Tabs -->
     <string name="tab_editor">Editör</string>

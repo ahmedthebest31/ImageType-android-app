@@ -59,6 +59,7 @@
     <string name="theme_dark">Modo oscuro</string>
     <string name="theme_light">Modo claro</string>
     <string name="theme_system">Predeterminado del sistema</string>
+    <string name="language_system_default">Predeterminado del sistema</string>
 
     <!-- Navigation Tabs -->
     <string name="tab_editor">Editor</string>

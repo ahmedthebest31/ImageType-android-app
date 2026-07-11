@@ -72,7 +72,7 @@ class EditorViewModel(application: Application) : AndroidViewModel(application) 
     private val _appTheme = MutableStateFlow(AppTheme.System)
     val appTheme: StateFlow<AppTheme> = _appTheme.asStateFlow()
 
-    private val _appLanguage = MutableStateFlow("en")
+    private val _appLanguage = MutableStateFlow("system")
     val appLanguage: StateFlow<String> = _appLanguage.asStateFlow()
 
     private val _hapticsEnabled = MutableStateFlow(true)
