@@ -92,12 +92,26 @@ class ImageGenerator(private val context: Context) {
             val tx = translationXY.first
             val ty = translationXY.second
 
+            // Stroke outline (for WCAG high contrast legibility)
+            if (textShadow) {
+                textPaint.style = Paint.Style.STROKE
+                textPaint.strokeWidth = finalFontSize * 0.08f
+                textPaint.strokeJoin = Paint.Join.ROUND
+                textPaint.color = if (isColorLight(textColor)) Color.BLACK else Color.WHITE
+
+                canvas.save()
+                canvas.translate(tx, ty)
+                staticLayout.draw(canvas)
+                canvas.restore()
+            }
+
+            // Render filled text
             textPaint.style = Paint.Style.FILL
             textPaint.strokeWidth = 0f
             textPaint.color = getHexColor(textColor)
             if (textShadow) {
-                val shadowColor = if (isColorLight(textColor)) 0x80000000.toInt() else 0x60000000.toInt()
-                textPaint.setShadowLayer(6f, 2f, 3f, shadowColor)
+                val shadowColor = if (isColorLight(textColor)) 0x80000000.toInt() else 0x80FFFFFF.toInt()
+                textPaint.setShadowLayer(8f, 3f, 3f, shadowColor)
             } else {
                 textPaint.clearShadowLayer()
             }
